@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 16:21:32 by macamach          #+#    #+#             */
-/*   Updated: 2025/12/12 16:31:56 by macamach         ###   ########.fr       */
+/*   Created: 2025/12/16 10:22:22 by macamach          #+#    #+#             */
+/*   Updated: 2025/12/18 14:48:26 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	main(int argc, char *argv[])
+typedef struct stack
 {
-	int	*a;
-	int	*b;
-	int i;
+	int	*array;
+	int	top;
+}	t_stack;
 
-	printf("Elementos:[%d]\n", argc - 1);
-	i = 1;
-	while (i < argc)
-		printf("Numero:[%s]\n", argv[i++]);
-	return (0);
-}
+void	print_stack(t_stack *a);
+t_stack	*new_stack(int size);
+void	push_stack(t_stack *s, int number);
+int		pop_stack(t_stack *s);
+void	free_stack(t_stack *s);
+void	swap(t_stack *s);
+void	operation(char *op, t_stack *a, t_stack *b); 
+#endif
