@@ -19,11 +19,13 @@ typedef struct stack
 	int	top;
 }	t_stack;
 
-void	print_stack(t_stack *a);
+void	print_stack(t_stack *a, t_stack *b);
 t_stack	*new_stack(int size);
 void	push_stack(t_stack *s, int number);
 int		pop_stack(t_stack *s);
 void	free_stack(t_stack *s);
 void	swap(t_stack *s);
-void	operation(char *op, t_stack *a, t_stack *b); 
+void	op_swap(char *op, t_stack *a, t_stack *b);
+void	op_push(char *op, t_stack *a, t_stack *b);
+void	op_rotate(char *op, t_stack *a, t_stack *b);
 #endif
