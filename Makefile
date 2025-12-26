@@ -1,9 +1,9 @@
 NAME = a.out
 
-SRC = push_swap.c
+SRC = push_swap.c main.c
 
 $(NAME):$(SRC)
-	cc $(SRC) -L ./libft -lft -o a.out
+	cc -Wall -Werror -Wextra $(SRC) -L ./libft -lft -o $(NAME)
 
 debug: $(SRC)
-	cc -g $(SRC) -L ./libft -lft -o a.out
+	cc -Wall -Werror -Wextra -g $(SRC) -L ./libft -lft -o $(NAME)

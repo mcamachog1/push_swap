@@ -15,72 +15,14 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-int	main(int argc, char *argv[])
-{
-	t_stack	*a;
-	t_stack	*b;
-	int		i;
-
-	if (argc <  1)
-	{
-		printf("Arguments error\n");
-		return (0);
-	}
-	a = new_stack(argc - 1);
-	b = new_stack(argc - 1);
-	if (!a || !b)
-		return (0);
-	printf("Elementos:[%d]\n", argc - 1);
-	i = argc - 1;
-	while (i > 0)
-	{
-		push_stack(a, atoi(argv[i]));
-		i--;
-	}
-	printf("inicio\n");
-	print_stack(a, b);
-	printf("sa\n");
-	op_swap("sa", a, b);
-	print_stack(a, b);
-	printf("pb pb pb\n");
-	op_push("pb", a, b);
-	op_push("pb", a, b);
-	op_push("pb", a, b);
-	print_stack(a, b);
-	printf("rr\n");
-	op_rotate("rr", a, b);
-	print_stack(a, b);
-	printf("rrr\n");
-	op_rotate("rrr", a, b);
-	print_stack(a, b);
-	printf("sa\n");
-	op_swap("sa", a, b);
-	print_stack(a, b);
-	printf("pa pa pa\n");
-	op_push("pa", a, b);
-	op_push("pa", a, b);
-	op_push("pa", a, b);
-	print_stack(a, b);
-
-	free_stack(a);
-	free_stack(b);
-	free(a);
-	free(b);
-	return (0);
-}
 
 void	print_stack(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	j;
-	int	max;
 
 	i = a->top - 1;
 	j = b->top - 1;
-	if ( i > j )
-		max = i;
-	else
-		max = j;
 	while (i >= 0 || j >= 0)
 	{
 		if (i >= 0 )
@@ -108,25 +50,29 @@ t_stack	*new_stack(int size)
 	if (!s)
 		return (0);
 	s->top = 0;
+	s->capacity = size;
 	s->array = malloc(size * sizeof(int));
 	if (!s->array)
 		return (NULL);
 	return (s);
 }
 
-void	push_stack(t_stack *s, int number)
+int	push_stack(t_stack *s, int number)
 {
+	if (s->top >= s->capacity)
+		return (1);
 	s->array[s->top] = number;
 	s->top++;
+	return (0);
 }
 
-int	pop_stack(t_stack *s)
+int	pop_stack(t_stack *s, int *number)
 {
-	int	number;
-	
+	if (s->top <= 0)
+		return (1);
 	s->top--;
-	number = s->array[s->top];
-	return (number);
+	*number = s->array[s->top];
+	return (0);
 }
 
 void	free_stack(t_stack *s)
@@ -141,12 +87,11 @@ void	swap(t_stack *s)
 
 	if (s->top <= 1)
 		return ;
-	temp_1 = pop_stack(s);
-	temp_2 = pop_stack(s);
+	pop_stack(s, &temp_1);
+	pop_stack(s, &temp_2);
 	push_stack(s, temp_1);
 	push_stack(s, temp_2);
 }
-
 
 void	op_swap(char *op, t_stack *a, t_stack *b)
 {
@@ -193,20 +138,19 @@ void	rrotate(t_stack *s)
 
 void	op_push(char *op, t_stack *a, t_stack *b)
 {
-	int	temp;
+	int	n;
 
-	if (!ft_strncmp("pa", op, ft_strlen(op))) 
+	if (!ft_strncmp("pa", op, 2)) 
 	{
-		if (b->top >= 0)
-			push_stack(a, pop_stack(b));
+		if (pop_stack(b, &n) == 0)
+			if (push_stack(a, n) == 0)
+				write(1, "pa\n", 3);
 	}
-	if (!ft_strncmp("pb", op, ft_strlen(op))) 
+	if (!ft_strncmp("pb", op, 2)) 
 	{
-		if (a->top >= 0)
-		{
-			temp = pop_stack(a);
-			push_stack(b, temp);
-		}
+		if (pop_stack(a, &n) == 0)
+			if (push_stack(b, n) == 0)
+				write(1, "pb\n", 3);
 	}
 }
 

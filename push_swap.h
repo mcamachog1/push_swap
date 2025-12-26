@@ -17,12 +17,13 @@ typedef struct stack
 {
 	int	*array;
 	int	top;
+	int	capacity;
 }	t_stack;
 
 void	print_stack(t_stack *a, t_stack *b);
 t_stack	*new_stack(int size);
-void	push_stack(t_stack *s, int number);
-int		pop_stack(t_stack *s);
+int	push_stack(t_stack *s, int number);
+int	pop_stack(t_stack *s, int *number);
 void	free_stack(t_stack *s);
 void	swap(t_stack *s);
 void	op_swap(char *op, t_stack *a, t_stack *b);
