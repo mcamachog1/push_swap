@@ -42,6 +42,22 @@ void	print_stack(t_stack *a, t_stack *b)
 	printf("a  b\n");
 }
 
+int	is_ordered(t_stack *s)
+{
+	int	i;
+
+	if (s->top <= 1)
+		return (1);
+	i = s->top - 1;
+	while (i > 0)
+	{
+		if (s->array[i] > s->array[i - 1])
+			return (0);
+		i--;
+	}
+	return (1);
+}
+
 t_stack	*new_stack(int size)
 {
 	t_stack	*s;
@@ -55,6 +71,11 @@ t_stack	*new_stack(int size)
 	if (!s->array)
 		return (NULL);
 	return (s);
+}
+
+void	free_stack(t_stack *s)
+{
+	free(s->array);
 }
 
 int	push_stack(t_stack *s, int number)
@@ -75,42 +96,27 @@ int	pop_stack(t_stack *s, int *number)
 	return (0);
 }
 
-void	free_stack(t_stack *s)
-{
-	free(s->array);
-}
-
-void	swap(t_stack *s)
+int	swap(t_stack *s)
 {
 	int	temp_1;
 	int	temp_2;
 
 	if (s->top <= 1)
-		return ;
+		return (1);
 	pop_stack(s, &temp_1);
 	pop_stack(s, &temp_2);
 	push_stack(s, temp_1);
 	push_stack(s, temp_2);
+	return (0);
 }
 
-void	op_swap(char *op, t_stack *a, t_stack *b)
-{
-	if (!ft_strncmp("sa", op, 2)) 
-		swap(a);
-	if (!ft_strncmp("sb", op, 2)) 
-		swap(b);
-	if (!ft_strncmp("ss", op, 2)) 
-	{
-		swap(a);
-		swap(b);
-	}
-}
-
-void	rotate(t_stack *s)
+int	rotate(t_stack *s)
 {
 	int	temp;
 	int	i;
 
+	if (s->top <= 1)
+		return (1);
 	temp = s->array[s->top - 1];
 	i = s->top - 1;
 	while (i > 0)
@@ -119,13 +125,16 @@ void	rotate(t_stack *s)
 		i--;
 	}
 	s->array[0] = temp;
+	return (0);
 }
 
-void	rrotate(t_stack *s)
+int	rrotate(t_stack *s)
 {
 	int	temp;
 	int	i;
 
+	if (s->top <= 1)
+		return (1);
 	temp = s->array[0];
 	i = 0;
 	while (i < s->top - 1)
@@ -134,6 +143,7 @@ void	rrotate(t_stack *s)
 		i++;
 	}
 	s->array[s->top - 1] = temp;
+	return (0);
 }
 
 void	op_push(char *op, t_stack *a, t_stack *b)
@@ -154,30 +164,37 @@ void	op_push(char *op, t_stack *a, t_stack *b)
 	}
 }
 
+void	op_swap(char *op, t_stack *a, t_stack *b)
+{
+	if (!ft_strncmp("sa", op, 2)) 
+		if(swap(a)==0)
+			write(1, "sa\n", 3);
+	if (!ft_strncmp("sb", op, 2)) 
+		if(swap(b)==0)
+			write(1, "sb\n", 3	);
+	if (!ft_strncmp("ss", op, 2)) 
+		if (swap(a)==0 && swap(b)==0)
+			write(1, "ss\n", 3);
+}
+
 void	op_rotate(char *op, t_stack *a, t_stack *b)
 {
 	if (!ft_strncmp("ra", op, 2)) 
-		if (a->top > 0)
-			rotate(a);
-	if (!ft_strncmp("rra", op, 3)) 
-		if (a->top > 0)
-			rrotate(a);
+		if (rotate(a) == 0)
+			write(1, "ra\n", 3);
 	if (!ft_strncmp("rb", op, 2)) 
-		if (a->top > 0)
-			rotate(b);
+		if (rotate(b) == 0)
+			write(1, "rb\n", 3);
+	if (!ft_strncmp("rra", op, 3)) 
+		if (rrotate(a) == 0)
+			write(1, "rra\n", 4);
 	if (!ft_strncmp("rrb", op, 3)) 
-		if (a->top > 0)
-			rrotate(b);
+		if (rrotate(b) == 0)
+			write(1, "rrb\n", 4);
 	if (!ft_strncmp("rr", op, 2) && ft_strlen(op) == 2) 
-		if (a->top > 0 && b->top > 0)
-		{
-			rotate(a);
-			rotate(b);
-		}
-	if (!ft_strncmp("rrr", op, 3)) 
-		if (a->top > 0 && b->top > 0)
-		{
-			rrotate(a);
-			rrotate(b);
-		}
+		if(rotate(a)==0 && rotate(b)==0)
+			write(1, "rr\n", 3);
+	if (!ft_strncmp("rrr", op, 3) && ft_strlen(op) == 3) 
+		if(rrotate(a)==0 && rrotate(b)==0)
+			write(1, "rrr\n", 4);
 }

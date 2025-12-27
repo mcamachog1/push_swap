@@ -21,11 +21,12 @@ typedef struct stack
 }	t_stack;
 
 void	print_stack(t_stack *a, t_stack *b);
+int	is_ordered(t_stack *s);
 t_stack	*new_stack(int size);
 int	push_stack(t_stack *s, int number);
 int	pop_stack(t_stack *s, int *number);
 void	free_stack(t_stack *s);
-void	swap(t_stack *s);
+int	swap(t_stack *s);
 void	op_swap(char *op, t_stack *a, t_stack *b);
 void	op_push(char *op, t_stack *a, t_stack *b);
 void	op_rotate(char *op, t_stack *a, t_stack *b);

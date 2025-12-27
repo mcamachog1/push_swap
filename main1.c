@@ -25,6 +25,18 @@ int	main(int argc, char *argv[])
 		push_stack(a, atoi(argv[i]));
 		i--;
 	}
+	while (a->top > 0)
+	{
+		while (b->top > 0 && b->array[b->top - 1] < a->array[a->top - 1])
+		{
+			op_rotate("ra", a, b);
+			op_push("pb", a, b);
+			op_rotate("rra", a, b);
+			op_push("pa", a, b);
+			op_push("pa", a, b);
+		}
+		op_push("pb", a, b);
+	}
 	printf("inicio\n");
 	print_stack(a, b);
 	printf("sa\n");
