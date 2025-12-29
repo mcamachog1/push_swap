@@ -3,28 +3,75 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+int	input_error(int argc, char **argv)
+{
+
+	if (argc == 1)
+		return (1);
+	if (argv == NULL)
+		return (1);
+/*
+	char	*str;
+
+	if (argc == 2)
+	{
+		str = &argc[1];
+		if (str == NULL)
+			return (0);
+		while (*str)
+		{
+			if (*str < 0 && *str > 9)
+				return (0);
+			str++;
+		}
+	}
+*/
+	return (0);		
+}
+
 int main(int argc, char *argv[])
 {
     t_stack *a;
     t_stack *b;
+	char	**split;
     int i;
 
-    if (argc < 2)
-    {
-        printf("Arguments error\n");
-        return (1);
-    }
-    a = new_stack(argc - 1);
-    b = new_stack(argc - 1);
-    if (!a || !b)
-        return (0);
-    // printf("Elementos:[%d]\n", argc - 1);
-    i = argc - 1;
-    while (i > 0)
-    {
-        push_stack(a, atoi(argv[i]));
-        i--;
-    }
+
+	if (input_error(argc, argv))
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	} 
+	if (argc == 2)
+	{
+		split = ft_split(argv[1], ' ');
+		i = 0;
+		while (split[i] != NULL)
+			i++;
+		a = new_stack(i);
+		b = new_stack(i);
+		if (!a || !b)
+			return (0);
+		while (i > 0)
+		{
+			push_stack(a, atoi(split[i - 1]));
+			i--;
+		}
+		free(split);	
+	}
+	else
+	{
+		a = new_stack(argc - 1);
+		b = new_stack(argc - 1);
+		if (!a || !b)
+			return (0);
+		i = argc - 1;
+		while (i > 0)
+		{
+			push_stack(a, atoi(argv[i]));
+			i--;
+		}
+	}
     // print_stack(a, b);
     while (a->top > 0)
     {

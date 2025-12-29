@@ -1,4 +1,4 @@
-NAME = a.out
+NAME = push_swap 
 
 SRC = push_swap.c main.c
 
