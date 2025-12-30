@@ -20,6 +20,8 @@ typedef struct stack
 	int	capacity;
 }	t_stack;
 
+void order_3(t_stack *s);
+int	input_error(int argc, char **argv);
 void	print_stack(t_stack *a, t_stack *b);
 int	is_ordered(t_stack *s);
 t_stack	*new_stack(int size);

@@ -15,7 +15,70 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+void order_3(t_stack *s)
+{
+	if (s->top != 3)
+		return ;
+	if (s->array[0] > s->array[2] && s->array[1] > s->array[0])
+	{
+		op_rotate("rra", s, NULL);
+		if (s->array[2] > s->array[1])
+			op_swap("sa", s, NULL);
+		printf("caso 2\n");
+		return ;
+	}	
+	if (s->array[2] > s->array[1] && s->array[0] > s->array[2])
+	{
+		op_swap("sa", s, NULL);
+		printf("caso 3\n");
+		return ;
+	}
+	if (s->array[1] > s->array[2] && s->array[2] > s->array[0])
+	{
+		op_rotate("rra", s, NULL);
+		printf("caso 4\n");
+		return ;
+	}
+	if (s->array[2] > s->array[0] && s->array[0] > s->array[1])
+	{
+		op_rotate("ra", s, NULL);
+		printf("caso 5\n");
+		return ;
+	}
+	if (s->array[2] > s->array[1] && s->array[1] > s->array[0])
+	{
+		op_rotate("ra", s, NULL);
+		if (s->array[2] > s->array[1])
+			op_swap("sa", s, NULL);
+		printf("caso 6\n");
+		return ;
+	}
+}
+int	input_error(int argc, char **argv)
+{
 
+	if (argc == 1)
+		return (1);
+	if (argv == NULL)
+		return (1);
+/*
+	char	*str;
+
+	if (argc == 2)
+	{
+		str = &argc[1];
+		if (str == NULL)
+			return (0);
+		while (*str)
+		{
+			if (*str < 0 && *str > 9)
+				return (0);
+			str++;
+		}
+	}
+*/
+	return (0);		
+}
 void	print_stack(t_stack *a, t_stack *b)
 {
 	int	i;
