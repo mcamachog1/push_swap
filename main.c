@@ -3,6 +3,19 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+int	get_index(t_stack *s, int number)
+{
+	int	i;
+
+	i = 0;
+	while(s->array[i] != number && i < s->top)
+		i++;
+	if (i + 1 == s->top)
+		return (-1);
+	else
+		return (i);
+}
+
 int main(int argc, char *argv[])
 {
     t_stack *a;
@@ -46,37 +59,32 @@ int main(int argc, char *argv[])
 			i--;
 		}
 	}
-    //print_stack(a, b);
-    while (a->top > 0)
-    {
-        //print_stack(a, b);
-        if (a->top > 1 && a->array[a->top - 1] > a->array[a->top - 2])
-            op_swap("sa", a, b);
-        if (is_ordered(a) && b->top <= 0)
-        {
-            //printf("Sorted:\n");
-            break;
-        }
-        else if (is_ordered (a) && a->array[a->top - 1] >= b->array[b->top - 1] )
-        {
-            //printf("Sorted:\n");
-            break;
-        }
-             
-        //&& b->top > 0 && a->array[a->top - 1] >= b->array[b->top - 1]       
-        while (b->top > 0 && b->array[b->top - 1] > a->array[a->top - 1])
-        {
-            op_rotate("ra", a, b);
-            op_push("pa", a, b);
-            op_rotate("rra", a, b);
-        }
-        op_push("pb", a, b);
-    }
-    while (b->top > 0)
-        op_push("pa", a, b);
-    //print_stack(a, b);
-    // printf("Sorted:\n");
- 
+	if (a->top == 1)
+	{
+		print_stack(a, b);
+		return (0);
+	}
+    	if (a->top == 2)
+	{
+		if(a->array[0] < a->array[1])
+			op_swap("sa", a, NULL);
+		print_stack(a, b);
+		return (0); 
+	}
+	if (a->top == 3)
+	{
+		order_3(a);
+		print_stack(a, b);
+		return (0);
+	}
+	op_push("pb", a, b);
+	op_push("pb", a, b);
+	print_stack(a,b);
+	while (a->top > 0)
+    	{	
+		pop_stack(a, &i);
+	} 
+	print_stack(a,b);
     free_stack(a);
     free_stack(b);
     free(a);

@@ -79,6 +79,7 @@ void	print_stack(t_stack *a, t_stack *b)
 
 	i = a->top - 1;
 	j = b->top - 1;
+	printf("\n");
 	while (i >= 0 || j >= 0)
 	{
 		if (i >= 0 )
