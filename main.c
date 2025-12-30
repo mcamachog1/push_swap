@@ -46,9 +46,7 @@ int main(int argc, char *argv[])
 			i--;
 		}
 	}
-	print_stack(a, b);
-	order_3(a);
-    print_stack(a, b);
+    //print_stack(a, b);
     while (a->top > 0)
     {
         //print_stack(a, b);
