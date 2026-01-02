@@ -33,6 +33,33 @@ t_moves *new_moves(int number)
 	return (moves);
 }
 
+void	put_min_first(t_stack *a)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < a->top)
+	{
+		if (a->array[a->top - 1 - i] > a->array[0])
+			i++;
+		else
+			break ;
+	}
+	if (i <= a->top / 2)
+	{
+		j = 0;
+		while (j++ < i)
+			op_rotate("ra", a, NULL);
+	}
+	else
+	{
+		j = 0;
+		while (j++ < a->top - i)
+			op_rotate("rra", a, NULL);
+	}
+}
+
 void calculate_moves(t_moves *moves, t_stack *a, t_stack *b)
 {
 	int		target;
@@ -184,9 +211,14 @@ int main(int argc, char *argv[])
 		op_push("pb", a, b);
 		free(min_moves);
 	}
+	while (b->top > 0)
+		op_push("pa", a, b);
+	put_min_first(a);
+	//print_stack(a, b);
     free_stack(a);
     free_stack(b);
     free(a);
     free(b);
+
     return (0);
 }

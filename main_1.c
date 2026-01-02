@@ -18,14 +18,12 @@ int	main(int argc, char *argv[])
 	b = new_stack(argc - 1);
 	if (!a || !b)
 		return (0);
-	//printf("Elementos:[%d]\n", argc - 1);
 	i = argc - 1;
 	while (i > 0)
 	{
 		push_stack(a, atoi(argv[i]));
 		i--;
 	}
-	//print_stack(a, b);
 	while (a->top > 0)
 	{
 		while (b->top > 0 && b->array[b->top - 1] > a->array[a->top - 1])
@@ -38,8 +36,6 @@ int	main(int argc, char *argv[])
 	}
 	while (b->top > 0)
 		op_push("pa", a, b);
-	//printf("Sorted:\n");
-	//print_stack(a, b);
 	free_stack(a);
 	free_stack(b);
 	free(a);
