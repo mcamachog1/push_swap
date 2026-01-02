@@ -50,9 +50,9 @@ int	get_target(t_stack *b, int number)
 		return (b->array[b->top - 1]);	
 	while (i > 0)
 	{
-		if (number > b->array[i] && number < b->array[i - 1])
-			return (b->array[i - 1]);
 		i--;
+		if (number > b->array[i - 1] && number < b->array[i])
+			return (b->array[i - 1]);
 	}
 	return (-1);
 }

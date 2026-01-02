@@ -47,6 +47,7 @@ void calculate_moves(t_moves *moves, t_stack *a, t_stack *b)
 
 void print_moves(t_moves *moves)
 {
+	printf("Moves for number %d:\n", moves->number);
 	printf("Number: %d\n", moves->number);
 	printf("RA moves: %d\n", moves->ra_moves);
 	printf("RRA moves: %d\n", moves->rra_moves);
@@ -93,8 +94,6 @@ void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 			i++;
 		}
 	}	
-	op_push("pb", a, b);
-
 }
 
 int main(int argc, char *argv[])
@@ -141,25 +140,21 @@ int main(int argc, char *argv[])
 	}
 	if (a->top == 1)
 	{
-		print_stack(a, b);
 		return (0);
 	}
     	if (a->top == 2)
 	{
 		if(a->array[0] < a->array[1])
 			op_swap("sa", a, NULL);
-		print_stack(a, b);
 		return (0); 
 	}
 	if (a->top == 3)
 	{
 		order_3(a);
-		print_stack(a, b);
 		return (0);
 	}
 	op_push("pb", a, b);
 	op_push("pb", a, b);
-	print_stack(a,b);
 	t_moves *moves;
 	t_moves *min_moves;
 	while (a->top > 0)
@@ -185,12 +180,10 @@ int main(int argc, char *argv[])
 			free(moves);
 			i--;
 		}
-		print_moves(min_moves);
-		print_stack(a,b);
 		exec_moves(min_moves, a, b);
+		op_push("pb", a, b);
 		free(min_moves);
 	}
-	print_stack(a,b);	
     free_stack(a);
     free_stack(b);
     free(a);
