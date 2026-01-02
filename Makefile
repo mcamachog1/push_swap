@@ -1,6 +1,6 @@
 NAME = push_swap 
 
-SRC = push_swap.c main.c
+SRC = push_swap.c main.c push_cost.c
 
 $(NAME):$(SRC)
 	cc -Wall -Werror -Wextra $(SRC) -L ./libft -lft -o $(NAME)

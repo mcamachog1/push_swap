@@ -1,19 +1,100 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "push_cost.h"
 
-int	get_index(t_stack *s, int number)
+typedef struct moves
 {
-	int	i;
+	int	ra_moves;
+	int	rb_moves;
+	int	rra_moves;
+	int	rrb_moves;
+	int rr_moves;
+	int rrr_moves;
+	int	total_moves;
+	int number;
+}	t_moves;
+
+t_moves *new_moves(int number)
+{
+	t_moves *moves;
+
+	moves = (t_moves *)malloc(sizeof(t_moves));
+	if (!moves)
+		return (NULL);
+	moves->ra_moves = MAX_COST;
+	moves->rb_moves = MAX_COST;
+	moves->rra_moves = MAX_COST;
+	moves->rrb_moves = MAX_COST;
+	moves->rr_moves = MAX_COST;
+	moves->rrr_moves = MAX_COST;
+	moves->total_moves = MAX_COST;
+	moves->number = number;
+	return (moves);
+}
+
+void calculate_moves(t_moves *moves, t_stack *a, t_stack *b)
+{
+	int		target;
+
+	target = get_target(b, moves->number);
+	moves->ra_moves = cost_ra(a, moves->number);
+	moves->rra_moves = cost_rra(a, moves->number);
+	moves->rb_moves = cost_rb(b, target);
+	moves->rrb_moves = cost_rrb(b, target);
+	moves->total_moves = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves);	
+}
+
+void print_moves(t_moves *moves)
+{
+	printf("Number: %d\n", moves->number);
+	printf("RA moves: %d\n", moves->ra_moves);
+	printf("RRA moves: %d\n", moves->rra_moves);
+	printf("RB moves: %d\n", moves->rb_moves);
+	printf("RRB moves: %d\n", moves->rrb_moves);
+	printf("Total moves: %d\n", moves->total_moves);
+}
+
+void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
+{
+	int		i;
 
 	i = 0;
-	while(s->array[i] != number && i < s->top)
-		i++;
-	if (i + 1 == s->top)
-		return (-1);
+	if (moves->ra_moves <= moves->rra_moves)
+	{
+		while (i < moves->ra_moves)
+		{
+			op_rotate("ra", a, NULL);
+			i++;
+		}
+	}
 	else
-		return (i);
+	{
+		while (i < moves->rra_moves)
+		{
+			op_rotate("rra", a, NULL);
+			i++;
+		}
+	}
+	i = 0;
+	if (moves->rb_moves <= moves->rrb_moves)
+	{
+		while (i < moves->rb_moves)
+		{
+			op_rotate("rb", NULL, b);
+			i++;
+		}
+	}
+	else
+	{
+		while (i < moves->rrb_moves)
+		{
+			op_rotate("rrb", NULL, b);
+			i++;
+		}
+	}	
+	op_push("pb", a, b);
+
 }
 
 int main(int argc, char *argv[])
@@ -21,8 +102,7 @@ int main(int argc, char *argv[])
     t_stack *a;
     t_stack *b;
 	char	**split;
-    int i;
-
+    int i;    
 
 	if (input_error(argc, argv))
 	{
@@ -80,11 +160,37 @@ int main(int argc, char *argv[])
 	op_push("pb", a, b);
 	op_push("pb", a, b);
 	print_stack(a,b);
+	t_moves *moves;
+	t_moves *min_moves;
 	while (a->top > 0)
-    	{	
-		pop_stack(a, &i);
-	} 
-	print_stack(a,b);
+	{
+		i = a->top - 1;
+		min_moves = new_moves(a->array[i]);
+		if (!min_moves)
+			return (0);
+		while (i >= 0)
+		{
+			moves = new_moves(a->array[i]);
+			if (!moves)
+				return (0);
+			moves->number = a->array[i];
+			calculate_moves(moves, a, b);
+			if (moves->total_moves < min_moves->total_moves)
+			{
+				free(min_moves);
+				min_moves = moves;
+				i--;
+				continue;
+			}	
+			free(moves);
+			i--;
+		}
+		print_moves(min_moves);
+		print_stack(a,b);
+		exec_moves(min_moves, a, b);
+		free(min_moves);
+	}
+	print_stack(a,b);	
     free_stack(a);
     free_stack(b);
     free(a);

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "push_cost.h"
 
 int	main(int argc, char *argv[])
 {
