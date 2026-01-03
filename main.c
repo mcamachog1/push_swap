@@ -26,8 +26,8 @@ t_moves *new_moves(int number)
 	moves->rb_moves = MAX_COST;
 	moves->rra_moves = MAX_COST;
 	moves->rrb_moves = MAX_COST;
-	moves->rr_moves = MAX_COST;
-	moves->rrr_moves = MAX_COST;
+	moves->rr_moves = 0;
+	moves->rrr_moves = 0;
 	moves->total_moves = MAX_COST;
 	moves->number = number;
 	return (moves);
@@ -72,55 +72,88 @@ void calculate_moves(t_moves *moves, t_stack *a, t_stack *b)
 	moves->total_moves = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves);	
 }
 
+void	optimize_moves(t_moves *moves)
+{
+	int	min_a;
+	int	min_b;
+	int	cost;
+
+	min_a = ft_min(moves->ra_moves, moves->rra_moves);
+	min_b = ft_min(moves->rb_moves, moves->rrb_moves);
+	if (moves->ra_moves == min_a && moves->rb_moves == min_b)
+	{
+		moves->rr_moves = ft_min(moves->ra_moves, moves->rb_moves);
+		moves->ra_moves -= moves->rr_moves;
+		moves->rb_moves -= moves->rr_moves;
+	}
+	else if (moves->rra_moves == min_a && moves->rrb_moves == min_b)
+	{
+		moves->rrr_moves = ft_min(moves->rra_moves, moves->rrb_moves);
+		moves->rra_moves -= moves->rrr_moves;
+		moves->rrb_moves -= moves->rrr_moves;
+	}
+	cost = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves) + moves->rr_moves + moves->rrr_moves;
+	moves->total_moves = cost;
+}
+
 void print_moves(t_moves *moves)
 {
 	printf("Moves for number %d:\n", moves->number);
 	printf("Number: %d\n", moves->number);
-	printf("RA moves: %d\n", moves->ra_moves);
-	printf("RRA moves: %d\n", moves->rra_moves);
-	printf("RB moves: %d\n", moves->rb_moves);
-	printf("RRB moves: %d\n", moves->rrb_moves);
+	printf("ra moves: %d\n", moves->ra_moves);
+	printf("rra moves: %d\n", moves->rra_moves);
+	printf("rb moves: %d\n", moves->rb_moves);
+	printf("rrb moves: %d\n", moves->rrb_moves);
+	printf("rr moves: %d\n", moves->rr_moves);
+	printf("rrr moves: %d\n", moves->rrr_moves);	
 	printf("Total moves: %d\n", moves->total_moves);
 }
 
 void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 {
-	int		i;
+	int		ma;
+	int		mb;
 
-	i = 0;
-	if (moves->ra_moves <= moves->rra_moves)
+	ma = ft_min(moves->ra_moves, moves->rra_moves);
+	mb = ft_min(moves->rb_moves, moves->rrb_moves);
+	while (moves->rr_moves > 0)
 	{
-		while (i < moves->ra_moves)
+		op_rotate("rr", a, b);
+		moves->rr_moves--;
+	}
+	while (moves->rrr_moves > 0)
+	{
+		op_rotate("rrr", a, b);
+		moves->rrr_moves--;
+	}
+	while (ma>0)
+	{
+		if (moves->ra_moves == ma)
 		{
 			op_rotate("ra", a, NULL);
-			i++;
+			moves->ra_moves--;
 		}
-	}
-	else
-	{
-		while (i < moves->rra_moves)
+		else
 		{
 			op_rotate("rra", a, NULL);
-			i++;
+			moves->rra_moves--;
 		}
+		ma--;
 	}
-	i = 0;
-	if (moves->rb_moves <= moves->rrb_moves)
+	while (mb>0)
 	{
-		while (i < moves->rb_moves)
+		if (moves->rb_moves == mb)
 		{
 			op_rotate("rb", NULL, b);
-			i++;
+			moves->rb_moves--;	
 		}
-	}
-	else
-	{
-		while (i < moves->rrb_moves)
+		else
 		{
 			op_rotate("rrb", NULL, b);
-			i++;
+			moves->rrb_moves--;
 		}
-	}	
+		mb--;	
+	}
 }
 
 int main(int argc, char *argv[])
@@ -195,8 +228,9 @@ int main(int argc, char *argv[])
 			moves = new_moves(a->array[i]);
 			if (!moves)
 				return (0);
-			moves->number = a->array[i];
+			//moves->number = a->array[i];
 			calculate_moves(moves, a, b);
+			optimize_moves(moves);
 			if (moves->total_moves < min_moves->total_moves)
 			{
 				free(min_moves);
@@ -211,8 +245,13 @@ int main(int argc, char *argv[])
 		op_push("pb", a, b);
 		free(min_moves);
 	}
+	//order_3(a);
 	while (b->top > 0)
+	{
+		//while (b->array[b->top - 1] > a->array[a->top - 1])
+		//	op_rotate("ra", a, NULL);
 		op_push("pa", a, b);
+	}
 	put_min_first(a);
 	//print_stack(a, b);
     free_stack(a);
