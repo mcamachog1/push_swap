@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   stacks.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 10:22:22 by macamach          #+#    #+#             */
-/*   Updated: 2025/12/18 14:48:26 by macamach         ###   ########.fr       */
+/*   Created: 2026/01/07 10:17:48 by macamach          #+#    #+#             */
+/*   Updated: 2026/01/07 10:21:16 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef STACKS_H
+# define STACKS_H
 
 typedef struct stack
 {

@@ -1,257 +1,293 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 16:21:32 by macamach          #+#    #+#             */
-/*   Updated: 2025/12/18 15:28:07 by macamach         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "push_cost.h"
 
-void order_3(t_stack *s)
+typedef struct moves
 {
-	if (s->top != 3)
-		return ;
-	if (s->array[0] > s->array[2] && s->array[1] > s->array[0])
+	int	ra_moves;
+	int	rb_moves;
+	int	rra_moves;
+	int	rrb_moves;
+	int rr_moves;
+	int rrr_moves;
+	int	total_moves;
+	int number;
+}	t_moves;
+
+t_moves *new_moves(int number)
+{
+	t_moves *moves;
+
+	moves = (t_moves *)malloc(sizeof(t_moves));
+	if (!moves)
+		return (NULL);
+	moves->ra_moves = MAX_COST;
+	moves->rb_moves = MAX_COST;
+	moves->rra_moves = MAX_COST;
+	moves->rrb_moves = MAX_COST;
+	moves->rr_moves = 0;
+	moves->rrr_moves = 0;
+	moves->total_moves = MAX_COST;
+	moves->number = number;
+	return (moves);
+}
+
+void pre_order(t_stack *a, t_stack *b)
+{
+	int sum;
+	int n;
+	int i;
+
+	n = a->top;
+	sum = 0;
+	i = 0;
+	while (i < n)
 	{
-		op_rotate("rra", s, NULL);
-		op_swap("sa", s, NULL);
-		return ;
-	}	
-	if (s->array[2] > s->array[1] && s->array[0] > s->array[2])
-	{
-		op_swap("sa", s, NULL);
-		return ;
+		sum += a->array[i];
+		i++;			
 	}
-	if (s->array[1] > s->array[2] && s->array[2] > s->array[0])
+	while (i >= 0)
 	{
-		op_rotate("rra", s, NULL);
-		return ;
-	}
-	if (s->array[2] > s->array[0] && s->array[0] > s->array[1])
-	{
-		op_rotate("ra", s, NULL);
-		return ;
-	}
-	if (s->array[2] > s->array[1] && s->array[1] > s->array[0])
-	{
-		op_rotate("ra", s, NULL);
-		op_swap("sa", s, NULL);
-		return ;
+		if (a->array[a->top - 1] <= sum / n)
+			op_push("pb", a, b);
+		else
+			op_rotate("ra", a, NULL);
+		i--;
 	}
 }
-int	input_error(int argc, char **argv)
+
+void	put_min_first(t_stack *a)
 {
+	int i;
+	int j;
 
-	if (argc == 1)
-		return (1);
-	if (argv == NULL)
-		return (1);
-/*
-	char	*str;
+	i = 0;
+	while (i < a->top)
+	{
+		if (a->array[a->top - 1 - i] > a->array[0])
+			i++;
+		else
+			break ;
+	}
+	if (i <= a->top / 2)
+	{
+		j = 0;
+		while (j++ < i)
+			op_rotate("ra", a, NULL);
+	}
+	else
+	{
+		j = 0;
+		while (j++ < a->top - i)
+			op_rotate("rra", a, NULL);
+	}
+}
 
+void calculate_moves(t_moves *moves, t_stack *a, t_stack *b)
+{
+	int		target;
+
+	target = get_target(b, moves->number);
+	moves->ra_moves = cost_ra(a, moves->number);
+	moves->rra_moves = cost_rra(a, moves->number);
+	moves->rb_moves = cost_rb(b, target);
+	moves->rrb_moves = cost_rrb(b, target);
+	moves->total_moves = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves);	
+}
+
+void	optimize_moves(t_moves *moves)
+{
+	int	min_a;
+	int	min_b;
+	int	cost;
+
+	min_a = ft_min(moves->ra_moves, moves->rra_moves);
+	min_b = ft_min(moves->rb_moves, moves->rrb_moves);
+	if (moves->ra_moves == min_a && moves->rb_moves == min_b)
+	{
+		moves->rr_moves = ft_min(moves->ra_moves, moves->rb_moves);
+		moves->ra_moves -= moves->rr_moves;
+		moves->rb_moves -= moves->rr_moves;
+	}
+	else if (moves->rra_moves == min_a && moves->rrb_moves == min_b)
+	{
+		moves->rrr_moves = ft_min(moves->rra_moves, moves->rrb_moves);
+		moves->rra_moves -= moves->rrr_moves;
+		moves->rrb_moves -= moves->rrr_moves;
+	}
+	cost = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves) + moves->rr_moves + moves->rrr_moves;
+	moves->total_moves = cost;
+}
+
+void print_moves(t_moves *moves)
+{
+	printf("Moves for number %d:\n", moves->number);
+	printf("Number: %d\n", moves->number);
+	printf("ra moves: %d\n", moves->ra_moves);
+	printf("rra moves: %d\n", moves->rra_moves);
+	printf("rb moves: %d\n", moves->rb_moves);
+	printf("rrb moves: %d\n", moves->rrb_moves);
+	printf("rr moves: %d\n", moves->rr_moves);
+	printf("rrr moves: %d\n", moves->rrr_moves);	
+	printf("Total moves: %d\n", moves->total_moves);
+}
+
+void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
+{
+	int		ma;
+	int		mb;
+
+	ma = ft_min(moves->ra_moves, moves->rra_moves);
+	mb = ft_min(moves->rb_moves, moves->rrb_moves);
+	while (moves->rr_moves > 0)
+	{
+		op_rotate("rr", a, b);
+		moves->rr_moves--;
+	}
+	while (moves->rrr_moves > 0)
+	{
+		op_rotate("rrr", a, b);
+		moves->rrr_moves--;
+	}
+	while (ma>0)
+	{
+		if (moves->ra_moves == ma)
+		{
+			op_rotate("ra", a, NULL);
+			moves->ra_moves--;
+		}
+		else
+		{
+			op_rotate("rra", a, NULL);
+			moves->rra_moves--;
+		}
+		ma--;
+	}
+	while (mb>0)
+	{
+		if (moves->rb_moves == mb)
+		{
+			op_rotate("rb", NULL, b);
+			moves->rb_moves--;	
+		}
+		else
+		{
+			op_rotate("rrb", NULL, b);
+			moves->rrb_moves--;
+		}
+		mb--;	
+	}
+}
+
+int main(int argc, char *argv[])
+{
+    t_stack *a;
+    t_stack *b;
+	char	**split;
+    int i;    
+
+	if (input_error(argc, argv))
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	} 
 	if (argc == 2)
 	{
-		str = &argc[1];
-		if (str == NULL)
+		split = ft_split(argv[1], ' ');
+		i = 0;
+		while (split[i] != NULL)
+			i++;
+		a = new_stack(i);
+		b = new_stack(i);
+		if (!a || !b)
 			return (0);
-		while (*str)
+		while (i > 0)
 		{
-			if (*str < 0 && *str > 9)
-				return (0);
-			str++;
+			push_stack(a, atoi(split[i - 1]));
+			i--;
+		}
+		free(split);	
+	}
+	else
+	{
+		a = new_stack(argc - 1);
+		b = new_stack(argc - 1);
+		if (!a || !b)
+			return (0);
+		i = argc - 1;
+		while (i > 0)
+		{
+			push_stack(a, atoi(argv[i]));
+			i--;
 		}
 	}
-*/
-	return (0);		
-}
-void	print_stack(t_stack *a, t_stack *b)
-{
-	int	i;
-	int	j;
-
-	i = a->top - 1;
-	j = b->top - 1;
-	printf("\n");
-	while (i >= 0 || j >= 0)
+	if (a->top == 1)
 	{
-		if (i >= 0 )
-			printf("%i  ", a->array[i]);
-		else
-			printf("   ");
-		if (j >= 0)
-			printf("%i  ", b->array[j]);
-		else
-			printf("   ");
-		printf("\n");
-		i--;
-		j--;
-	}
-	printf("\n");
-	printf("-  -\n");
-	printf("a  b\n");
-}
-
-int	is_ordered(t_stack *s)
-{
-	int	i;
-
-	if (s->top <= 1)
-		return (1);
-	i = s->top - 1;
-	while (i > 0)
-	{
-		if (s->array[i] > s->array[i - 1])
-			return (0);
-		i--;
-	}
-	return (1);
-}
-
-t_stack	*new_stack(int size)
-{
-	t_stack	*s;
-
-	s = malloc(sizeof(t_stack));
-	if (!s)
 		return (0);
-	s->top = 0;
-	s->capacity = size;
-	s->array = malloc(size * sizeof(int));
-	if (!s->array)
-		return (NULL);
-	return (s);
-}
-
-void	free_stack(t_stack *s)
-{
-	free(s->array);
-}
-
-int	push_stack(t_stack *s, int number)
-{
-	if (s->top >= s->capacity)
-		return (1);
-	s->array[s->top] = number;
-	s->top++;
-	return (0);
-}
-
-int	pop_stack(t_stack *s, int *number)
-{
-	if (s->top <= 0)
-		return (1);
-	s->top--;
-	*number = s->array[s->top];
-	return (0);
-}
-
-int	swap(t_stack *s)
-{
-	int	temp_1;
-	int	temp_2;
-
-	if (s->top <= 1)
-		return (1);
-	pop_stack(s, &temp_1);
-	pop_stack(s, &temp_2);
-	push_stack(s, temp_1);
-	push_stack(s, temp_2);
-	return (0);
-}
-
-int	rotate(t_stack *s)
-{
-	int	temp;
-	int	i;
-
-	if (s->top <= 1)
-		return (1);
-	temp = s->array[s->top - 1];
-	i = s->top - 1;
-	while (i > 0)
-	{
-		s->array[i] = s->array[i - 1];
-		i--;
 	}
-	s->array[0] = temp;
-	return (0);
-}
-
-int	rrotate(t_stack *s)
-{
-	int	temp;
-	int	i;
-
-	if (s->top <= 1)
-		return (1);
-	temp = s->array[0];
-	i = 0;
-	while (i < s->top - 1)
+    	if (a->top == 2)
 	{
-		s->array[i] = s->array[i + 1];
-		i++;
+		if(a->array[0] < a->array[1])
+			op_swap("sa", a, NULL);
+		return (0); 
 	}
-	s->array[s->top - 1] = temp;
-	return (0);
-}
-
-void	op_push(char *op, t_stack *a, t_stack *b)
-{
-	int	n;
-
-	if (!ft_strncmp("pa", op, 2)) 
+	if (a->top == 3)
 	{
-		if (pop_stack(b, &n) == 0)
-			if (push_stack(a, n) == 0)
-				write(1, "pa\n", 3);
+		order_3(a);
+		return (0);
 	}
-	if (!ft_strncmp("pb", op, 2)) 
+	//print_stack(a, b);
+	//pre_order(a, b);
+	//print_stack(a, b);
+	while (b->top > 0)
+		op_push("pa", a, b);
+	//print_stack(a, b);	
+	op_push("pb", a, b);
+	op_push("pb", a, b);
+	t_moves *moves;
+	t_moves *min_moves;
+	while (a->top > 0)
 	{
-		if (pop_stack(a, &n) == 0)
-			if (push_stack(b, n) == 0)
-				write(1, "pb\n", 3);
+		i = a->top - 1;
+		min_moves = new_moves(a->array[i]);
+		if (!min_moves)
+			return (0);
+		while (i >= 0)
+		{
+			moves = new_moves(a->array[i]);
+			if (!moves)
+				return (0);
+			//moves->number = a->array[i];
+			calculate_moves(moves, a, b);
+			optimize_moves(moves);
+			if (moves->total_moves < min_moves->total_moves)
+			{
+				free(min_moves);
+				min_moves = moves;
+				i--;
+				continue;
+			}	
+			free(moves);
+			i--;
+		}
+		exec_moves(min_moves, a, b);
+		op_push("pb", a, b);
+		free(min_moves);
 	}
-}
+	//order_3(a);
+	while (b->top > 0)
+	{
+		//while (b->array[b->top - 1] > a->array[a->top - 1])
+		//	op_rotate("ra", a, NULL);
+		op_push("pa", a, b);
+	}
+	put_min_first(a);
+	//print_stack(a, b);
+    free_stack(a);
+    free_stack(b);
+    free(a);
+    free(b);
 
-void	op_swap(char *op, t_stack *a, t_stack *b)
-{
-	if (!ft_strncmp("sa", op, 2)) 
-		if(swap(a)==0)
-			write(1, "sa\n", 3);
-	if (!ft_strncmp("sb", op, 2)) 
-		if(swap(b)==0)
-			write(1, "sb\n", 3	);
-	if (!ft_strncmp("ss", op, 2)) 
-		if (swap(a)==0 && swap(b)==0)
-			write(1, "ss\n", 3);
-}
-
-void	op_rotate(char *op, t_stack *a, t_stack *b)
-{
-	if (!ft_strncmp("ra", op, 2)) 
-		if (rotate(a) == 0)
-			write(1, "ra\n", 3);
-	if (!ft_strncmp("rb", op, 2)) 
-		if (rotate(b) == 0)
-			write(1, "rb\n", 3);
-	if (!ft_strncmp("rra", op, 3)) 
-		if (rrotate(a) == 0)
-			write(1, "rra\n", 4);
-	if (!ft_strncmp("rrb", op, 3)) 
-		if (rrotate(b) == 0)
-			write(1, "rrb\n", 4);
-	if (!ft_strncmp("rr", op, 2) && ft_strlen(op) == 2) 
-		if(rotate(a)==0 && rotate(b)==0)
-			write(1, "rr\n", 3);
-	if (!ft_strncmp("rrr", op, 3) && ft_strlen(op) == 3) 
-		if(rrotate(a)==0 && rrotate(b)==0)
-			write(1, "rrr\n", 4);
+    return (0);
 }

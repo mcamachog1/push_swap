@@ -5,7 +5,7 @@
 #  define MAX_COST 1000
 # endif
 
-#include "push_swap.h"
+#include "stacks.h"
 
 int	ft_min(int a, int b);
 int	ft_max(int a, int b);
