@@ -11,8 +11,15 @@ N=$1
 ARG=$(./nums_generator $N)
 
 echo "--- Testing $N numbers ---"
+<<<<<<< HEAD
 echo -n "--- Movements: "
 ./push_swap $ARG | wc -l
 
 echo -n "--- Result: "
+=======
+echo -n "--- Movements ---"
+./push_swap $ARG | wc -l
+
+echo -n "--- Result ---"
+>>>>>>> 78eb6fa8f5d27fa53312518266a1b332a313afdf
 ./push_swap $ARG | ./checker_linux $ARG
