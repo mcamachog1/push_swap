@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "push_cost.h"
+#include "push_swap.h"
 
 void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 {

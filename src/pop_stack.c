@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "stacks.h"
+#include "push_swap.h"
 
 int	pop_stack(t_stack *s, int *number)
 {

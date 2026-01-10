@@ -1,8 +1,6 @@
 
-#include <stdio.h>
 #include <stdlib.h>
-#include "libft/libft.h"
-#include "stacks.h"
+#include "push_swap.h"
 
 t_stack	*new_stack(int size)
 {
@@ -15,6 +13,6 @@ t_stack	*new_stack(int size)
 	s->capacity = size;
 	s->array = malloc(size * sizeof(int));
 	if (!s->array)
-		return (NULL);
+		return (0);
 	return (s);
 }

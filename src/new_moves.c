@@ -1,8 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "libft/libft.h"
-#include "push_cost.h"
-
+#include "push_swap.h"
 
 t_moves *new_moves(int number)
 {
@@ -10,7 +7,7 @@ t_moves *new_moves(int number)
 
 	moves = (t_moves *)malloc(sizeof(t_moves));
 	if (!moves)
-		return (NULL);
+		return (0);
 	moves->ra_moves = MAX_COST;
 	moves->rb_moves = MAX_COST;
 	moves->rra_moves = MAX_COST;

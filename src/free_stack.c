@@ -1,7 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "libft/libft.h"
-#include "stacks.h"
+#include "push_swap.h"
 
 void	free_stack(t_stack *s)
 {

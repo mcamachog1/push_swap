@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "push_cost.h"
+#include "../../push_swap/libft/libft.h"
+#include "push_swap.h"
 
 int main(int argc, char *argv[])
 {
@@ -109,8 +107,7 @@ int main(int argc, char *argv[])
 	//print_stack(a, b);
     free_stack(a);
     free_stack(b);
-    free(a);
-    free(b);
+
 
     return (0);
 }

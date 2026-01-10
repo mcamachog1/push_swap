@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "push_cost.h"
+#include "push_swap.h"
 
 void	optimize_moves(t_moves *moves)
 {

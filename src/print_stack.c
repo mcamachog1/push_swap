@@ -1,7 +1,5 @@
+#include "push_swap.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "stacks.h"
 
 void	print_stack(t_stack *a, t_stack *b)
 {

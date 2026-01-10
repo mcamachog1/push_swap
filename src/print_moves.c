@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "push_cost.h"
+#include "push_swap.h"
 
 void print_moves(t_moves *moves)
 {

@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "stacks.h"
+#include <unistd.h>
+#include "../../push_swap/libft/libft.h"
+#include "push_swap.h"
 
 void	op_swap(char *op, t_stack *a, t_stack *b)
 {
