@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
+void	exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 {
 	int		ma;
 	int		mb;
@@ -17,7 +17,7 @@ void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 		op_rotate("rrr", a, b);
 		moves->rrr_moves--;
 	}
-	while (ma>0)
+	while (ma > 0)
 	{
 		if (moves->ra_moves == ma)
 		{
@@ -31,18 +31,18 @@ void exec_moves(t_moves *moves, t_stack *a, t_stack *b)
 		}
 		ma--;
 	}
-	while (mb>0)
+	while (mb > 0)
 	{
 		if (moves->rb_moves == mb)
 		{
 			op_rotate("rb", NULL, b);
-			moves->rb_moves--;	
+			moves->rb_moves--;
 		}
 		else
 		{
 			op_rotate("rrb", NULL, b);
 			moves->rrb_moves--;
 		}
-		mb--;	
+		mb--;
 	}
 }

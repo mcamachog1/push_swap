@@ -2,9 +2,9 @@
 
 int	get_target(t_stack *b, int number)
 {
-	int i;
-	int max;
-	int min;
+	int	i;
+	int	max;
+	int	min;
 
 	i = 0;
 	max = b->array[0];
@@ -18,7 +18,7 @@ int	get_target(t_stack *b, int number)
 	if (number > max || number < min)
 		return (max);
 	if (number > b->array[b->top - 1] && number < b->array[0])
-		return (b->array[b->top - 1]);	
+		return (b->array[b->top - 1]);
 	while (i > 0)
 	{
 		i--;

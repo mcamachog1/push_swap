@@ -7,7 +7,7 @@ SRC = ./src/calculate_moves.c  ./src/ft_min.c       ./src/op_rotate.c       ./sr
 ./src/cost_rrb.c         ./src/is_ordered.c   ./src/pop_stack.c       ./src/rrotate.c \
 ./src/exec_moves.c       ./src/new_moves.c    ./src/pre_order.c       ./src/swap.c \
 ./src/free_stack.c       ./src/new_stack.c    ./src/print_moves.c \
-./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c
+./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c	./src/get_params.c
 
 $(NAME):$(SRC)
 	cc -Wall -Werror -Wextra $(SRC) -L ./libft -lft -o $(NAME)
