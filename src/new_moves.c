@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-t_moves *new_moves(int number)
+t_moves	*new_moves(int number)
 {
-	t_moves *moves;
+	t_moves	*moves;
 
 	moves = (t_moves *)malloc(sizeof(t_moves));
 	if (!moves)

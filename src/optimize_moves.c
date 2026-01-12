@@ -20,6 +20,8 @@ void	optimize_moves(t_moves *moves)
 		moves->rra_moves -= moves->rrr_moves;
 		moves->rrb_moves -= moves->rrr_moves;
 	}
-	cost = ft_min(moves->ra_moves, moves->rra_moves) + ft_min(moves->rb_moves, moves->rrb_moves) + moves->rr_moves + moves->rrr_moves;
+	min_a = ft_min(moves->ra_moves, moves->rra_moves);
+	min_b = ft_min(moves->rb_moves, moves->rrb_moves);
+	cost = min_a + min_b + moves->rr_moves + moves->rrr_moves;
 	moves->total_moves = cost;
 }

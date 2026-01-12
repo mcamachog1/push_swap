@@ -3,9 +3,9 @@
 
 int	*get_params(char **argv, int *size)
 {
-	int	i;
-	int	j;
-	int	*numbers;
+	int		i;
+	int		j;
+	int		*numbers;
 	char	**cnumbers;
 
 	i = 1;

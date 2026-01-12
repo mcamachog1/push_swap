@@ -2,8 +2,8 @@
 
 void	put_min_first(t_stack *a)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < a->top)

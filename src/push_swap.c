@@ -3,11 +3,13 @@
 
 int	main(int argc, char *argv[])
 {
-	t_stack *a;
-	t_stack *b;
-	int i;   
-	int	*numbers; 
-	int	size;
+	t_stack	*a;
+	t_stack	*b;
+	t_moves	*moves;
+	t_moves	*min_moves;
+	int		i;
+	int		*numbers;
+	int		size;
 
 	if (argc == 1)
 		return (1);
@@ -24,9 +26,9 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (a->top == 2)
 	{
-		if(a->array[0] < a->array[1])
+		if (a->array[0] < a->array[1])
 			op_swap("sa", a, NULL);
-		return (0); 
+		return (0);
 	}
 	if (a->top == 3)
 	{
@@ -35,8 +37,6 @@ int	main(int argc, char *argv[])
 	}
 	op_push("pb", a, b);
 	op_push("pb", a, b);
-	t_moves *moves;
-	t_moves *min_moves;
 	while (a->top > 0)
 	{
 		i = a->top - 1;
@@ -55,8 +55,8 @@ int	main(int argc, char *argv[])
 				free(min_moves);
 				min_moves = moves;
 				i--;
-				continue;
-			}	
+				continue ;
+			}
 			free(moves);
 			i--;
 		}

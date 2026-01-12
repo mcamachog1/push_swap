@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-void pre_order(t_stack *a, t_stack *b)
+void	pre_order(t_stack *a, t_stack *b)
 {
-	int sum;
-	int n;
-	int i;
+	int	sum;
+	int	n;
+	int	i;
 
 	n = a->top;
 	sum = 0;
@@ -12,7 +12,7 @@ void pre_order(t_stack *a, t_stack *b)
 	while (i < n)
 	{
 		sum += a->array[i];
-		i++;			
+		i++;
 	}
 	while (i >= 0)
 	{
