@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include "../../push_swap/libft/libft.h"
 
-int	*get_params(char **argv, int *size)
+static int	get_size(char **argv)
 {
 	int		i;
 	int		j;
-	int		*numbers;
 	char	**cnumbers;
 
 	i = 1;
@@ -20,8 +19,18 @@ int	*get_params(char **argv, int *size)
 		}
 		i++;
 	}
-	*size = j;
-	numbers = malloc(j * sizeof(int));
+	return (j);
+}
+
+int	*get_params(char **argv, int *size)
+{
+	int		i;
+	int		j;
+	int		*numbers;
+	char	**cnumbers;
+
+	*size = get_size(argv);
+	numbers = malloc(*size * sizeof(int));
 	if (!numbers)
 		return (NULL);
 	i = 1;
