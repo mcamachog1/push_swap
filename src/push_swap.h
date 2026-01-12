@@ -48,21 +48,25 @@ int		cost_rb(t_stack *b, int n);
 int		cost_rra(t_stack *a, int n);
 int		cost_rrb(t_stack *b, int n);
 void	exec_moves(t_moves *moves, t_stack *a, t_stack *b);
-int		get_target(t_stack *s, int number);
 int		get_index(t_stack *s, int number);
+int		get_target(t_stack *s, int number);
 int		is_ordered(t_stack *s);
+void	min_first(t_stack *a);
 void	optimize_moves(t_moves *moves);
 void	order_3(t_stack *s);
+void	order_4(t_stack *a, t_stack *b);
+void	order_5(t_stack *a, t_stack *b);
+void	order_6(t_stack *a, t_stack *b);
 void	put_min_first(t_stack *a);
 
 /* --- Utilities and validation --- */
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
+t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
 int		*get_params(char **argv, int *size);
 int		input_error(int argc, char **argv);
 void	load_stack_a(t_stack *a, int *numbers, int size);
-int		order_less_than_4(t_stack *a);
-t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
+void	order_less_than_7(t_stack *a, t_stack *b);
 int		sort_stack(t_stack *a, t_stack *b);
 
 #endif

@@ -15,13 +15,17 @@ int	main(int argc, char *argv[])
 	b = new_stack(size);
 	load_stack_a(a, numbers, size);
 	free(numbers);
-	if (a->top <= 4)
-		return (order_less_than_4(a));
+	if (a->top < 7)
+	{
+		order_less_than_7(a, b);
+		return (0);
+	}
 	if (!sort_stack(a, b))
 		return (1);
 	while (b->top > 0)
 		op_push("pa", a, b);
-	put_min_first(a);
+	//put_min_first(a);
+	min_first(a);
 	free_stack(a);
 	free_stack(b);
 	return (0);
