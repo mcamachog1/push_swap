@@ -5,9 +5,10 @@ SRC = ./src/calculate_moves.c  ./src/ft_min.c       ./src/op_rotate.c       ./sr
 ./src/cost_rb.c          ./src/get_target.c   ./src/optimize_moves.c  ./src/put_min_first.c \
 ./src/cost_rra.c         ./src/input_error.c  ./src/order_3.c         ./src/rotate.c \
 ./src/cost_rrb.c         ./src/is_ordered.c   ./src/pop_stack.c       ./src/rrotate.c \
-./src/exec_moves.c       ./src/new_moves.c    ./src/pre_order.c       ./src/swap.c \
-./src/free_stack.c       ./src/new_stack.c    ./src/print_moves.c \
-./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c	./src/get_params.c
+./src/exec_moves.c       ./src/new_moves.c    ./src/swap.c \
+./src/free_stack.c       ./src/new_stack.c    \
+./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c	./src/get_params.c \
+./src/load_stack_a.c     ./src/order_less_than_4.c  ./src/get_best_moves.c ./src/sort_stack.c
 
 $(NAME):$(SRC)
 	cc -Wall -Werror -Wextra $(SRC) -L ./libft -lft -o $(NAME)

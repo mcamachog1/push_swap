@@ -60,6 +60,9 @@ int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 int		*get_params(char **argv, int *size);
 int		input_error(int argc, char **argv);
-void	print_stack(t_stack *a, t_stack *b);
+void	load_stack_a(t_stack *a, int *numbers, int size);
+int		order_less_than_4(t_stack *a);
+t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
+int		sort_stack(t_stack *a, t_stack *b);
 
 #endif
