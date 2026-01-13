@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/13 16:30:56 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:25:19 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,23 @@ static int	get_size(char **argv)
 	return (j);
 }
 
+static int	valid_argument(char *str)
+{
+	int i;
+
+	i = 0;
+
+	if (str[i] && str[i] == '-')
+		i++;	
+	while (str[i] && (size_t)i < ft_strlen(str))
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static int	load_numbers(char **argv, int *numbers)
 {
 	int		i;
@@ -50,7 +67,9 @@ static int	load_numbers(char **argv, int *numbers)
 			return (0);
 		while (cnumbers[j] != NULL)
 		{
-			numbers[j] = atoi(cnumbers[j]);
+			if (!valid_argument(cnumbers[j]))
+				return (free_string_pointers(cnumbers), 0);
+			numbers[j] = ft_atoi(cnumbers[j]);
 			j++;
 		}
 		i++;
