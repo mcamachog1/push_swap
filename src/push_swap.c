@@ -18,14 +18,12 @@ int	main(int argc, char *argv[])
 	if (a->top <= 12)
 	{
 		sort_by_selection(a, b);
-		return (0);
+		return (free_stacks(a, b), 0);
 	}
 	if (!sort_by_cost(a, b))
-		return (1);
+		return (free_stacks(a, b), 1);
 	while (b->top > 0)
 		op_push("pa", a, b);
 	min_first(a);
-	free_stack(a);
-	free_stack(b);
-	return (0);
+	return (free_stacks(a, b), 0);
 }

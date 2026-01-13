@@ -6,9 +6,9 @@ SRC = ./src/calculate_moves.c  ./src/ft_min.c       ./src/op_rotate.c       ./sr
 ./src/cost_rra.c         ./src/input_error.c  ./src/order_3.c         ./src/rotate.c \
 ./src/cost_rrb.c         ./src/is_ordered.c   ./src/pop_stack.c       ./src/rrotate.c \
 ./src/exec_moves.c       ./src/new_moves.c    ./src/swap.c \
-./src/free_stack.c       ./src/new_stack.c    ./src/sort_by_selection.c ./src/min_first.c \
+./src/free_stacks.c       ./src/new_stack.c    ./src/sort_by_selection.c ./src/min_first.c \
 ./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c	./src/get_params.c \
-./src/load_stack_a.c      ./src/get_best_moves.c ./src/sort_by_cost.c
+./src/load_stack_a.c      ./src/get_best_moves.c ./src/sort_by_cost.c ./src/free_string_pointers.c
 
 $(NAME):$(SRC)
 	cc -Wall -Werror -Wextra $(SRC) -L ./libft -lft -o $(NAME)

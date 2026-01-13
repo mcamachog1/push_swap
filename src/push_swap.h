@@ -27,7 +27,8 @@ typedef struct moves
 }	t_moves;
 
 /* --- Memory management and stacks --- */
-void	free_stack(t_stack *s);
+void	free_stacks(t_stack *a, t_stack *b);
+void    free_string_pointers(char **pointers);
 t_moves	*new_moves(int number);
 t_stack	*new_stack(int size);
 int		pop_stack(t_stack *s, int *number);
