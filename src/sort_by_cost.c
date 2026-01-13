@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-int	sort_stack(t_stack *a, t_stack *b)
+int	sort_by_cost(t_stack *a, t_stack *b)
 {
 	int		i;
 	t_moves	*min_moves;

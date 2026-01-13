@@ -54,10 +54,8 @@ int		is_ordered(t_stack *s);
 void	min_first(t_stack *a);
 void	optimize_moves(t_moves *moves);
 void	order_3(t_stack *s);
-void	order_4(t_stack *a, t_stack *b);
-void	order_5(t_stack *a, t_stack *b);
-void	order_6(t_stack *a, t_stack *b);
-void	put_min_first(t_stack *a);
+int		sort_by_cost(t_stack *a, t_stack *b);
+void	sort_by_selection(t_stack *a, t_stack *b);
 
 /* --- Utilities and validation --- */
 int		ft_max(int a, int b);
@@ -66,7 +64,5 @@ t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
 int		*get_params(char **argv, int *size);
 int		input_error(int argc, char **argv);
 void	load_stack_a(t_stack *a, int *numbers, int size);
-void	order_less_than_7(t_stack *a, t_stack *b);
-int		sort_stack(t_stack *a, t_stack *b);
 
 #endif

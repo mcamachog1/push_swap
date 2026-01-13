@@ -15,16 +15,15 @@ int	main(int argc, char *argv[])
 	b = new_stack(size);
 	load_stack_a(a, numbers, size);
 	free(numbers);
-	if (a->top < 7)
+	if (a->top <= 12)
 	{
-		order_less_than_7(a, b);
+		sort_by_selection(a, b);
 		return (0);
 	}
-	if (!sort_stack(a, b))
+	if (!sort_by_cost(a, b))
 		return (1);
 	while (b->top > 0)
 		op_push("pa", a, b);
-	//put_min_first(a);
 	min_first(a);
 	free_stack(a);
 	free_stack(b);
