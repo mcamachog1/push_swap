@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_params.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
+/*   Updated: 2026/01/13 16:30:56 by macamach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "../../push_swap/libft/libft.h"
 #include "push_swap.h"
@@ -14,7 +26,7 @@ static int	get_size(char **argv)
 	{
 		cnumbers = ft_split(argv[i], ' ');
 		if (!cnumbers)
-			return(0);
+			return (0);
 		while (cnumbers[j] != NULL)
 			j++;
 		i++;
@@ -23,7 +35,7 @@ static int	get_size(char **argv)
 	return (j);
 }
 
-static int load_numbers(char **argv, int *numbers)
+static int	load_numbers(char **argv, int *numbers)
 {
 	int		i;
 	int		j;
@@ -35,7 +47,7 @@ static int load_numbers(char **argv, int *numbers)
 	{
 		cnumbers = ft_split(argv[i], ' ');
 		if (!cnumbers)
-			return(0);
+			return (0);
 		while (cnumbers[j] != NULL)
 		{
 			numbers[j] = atoi(cnumbers[j]);
@@ -44,8 +56,7 @@ static int load_numbers(char **argv, int *numbers)
 		i++;
 		free_string_pointers(cnumbers);
 	}
-	return (j);	
-
+	return (j);
 }
 
 int	*get_params(char **argv, int *size)

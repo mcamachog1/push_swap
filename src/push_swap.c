@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 15:06:33 by macamach          #+#    #+#             */
+/*   Updated: 2026/01/13 16:31:49 by macamach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../push_swap/libft/libft.h"
 #include "push_swap.h"
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
@@ -15,6 +28,8 @@ int	main(int argc, char *argv[])
 	b = new_stack(size);
 	load_stack_a(a, numbers, size);
 	free(numbers);
+	if (is_ordered(a))
+		return (free_stacks(a, b), 0);
 	if (a->top <= 12)
 	{
 		sort_by_selection(a, b);

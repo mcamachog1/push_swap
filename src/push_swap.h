@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 16:29:05 by macamach          #+#    #+#             */
+/*   Updated: 2026/01/13 16:29:34 by macamach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -28,7 +40,7 @@ typedef struct moves
 
 /* --- Memory management and stacks --- */
 void	free_stacks(t_stack *a, t_stack *b);
-void    free_string_pointers(char **pointers);
+void	free_string_pointers(char **pointers);
 t_moves	*new_moves(int number);
 t_stack	*new_stack(int size);
 int		pop_stack(t_stack *s, int *number);
