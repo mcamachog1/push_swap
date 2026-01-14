@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap/libft/libft.h"
+#include "libft.h"
 #include "push_swap.h"
 
 void	op_rotate(char *op, t_stack *a, t_stack *b)

@@ -11,28 +11,33 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../push_swap/libft/libft.h"
+#include "libft.h"
 #include "push_swap.h"
 
 static int	get_size(char **argv)
 {
 	int		i;
 	int		j;
+	int		size;
 	char	**cnumbers;
 
 	i = 1;
-	j = 0;
+	size = 0;
 	while (argv[i] != NULL)
 	{
 		cnumbers = ft_split(argv[i], ' ');
 		if (!cnumbers)
 			return (0);
+		j = 0;
 		while (cnumbers[j] != NULL)
+		{
+			size++;	
 			j++;
+		}
 		i++;
 		free_string_pointers(cnumbers);
 	}
-	return (j);
+	return (size);
 }
 
 static int	valid_argument(char *str)
@@ -41,7 +46,7 @@ static int	valid_argument(char *str)
 
 	i = 0;
 
-	if (str[i] && str[i] == '-')
+	if (str[i] && (str[i] == '-' || str[i] == '+'))
 		i++;	
 	while (str[i] && (size_t)i < ft_strlen(str))
 	{
@@ -57,23 +62,26 @@ static int	load_numbers(char **argv, int *numbers)
 	int		i;
 	int		j;
 	char	**cnumbers;
+	char	**temp;
 
 	i = 1;
 	j = 0;
 	while (argv[i] != NULL)
 	{
 		cnumbers = ft_split(argv[i], ' ');
+		temp = cnumbers;
 		if (!cnumbers)
 			return (0);
-		while (cnumbers[j] != NULL)
+		while (*cnumbers != NULL)
 		{
-			if (!valid_argument(cnumbers[j]))
-				return (free_string_pointers(cnumbers), 0);
-			numbers[j] = ft_atoi(cnumbers[j]);
+			if (!valid_argument(*cnumbers))
+				return (free_string_pointers(temp), 0);
+			numbers[j] = ft_atoi(*cnumbers);
 			j++;
+			cnumbers++;
 		}
 		i++;
-		free_string_pointers(cnumbers);
+		free_string_pointers(temp);
 	}
 	return (j);
 }

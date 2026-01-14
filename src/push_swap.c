@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap/libft/libft.h"
+#include "libft.h"
 #include "push_swap.h"
 #include <stdio.h>
 

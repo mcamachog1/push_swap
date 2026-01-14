@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "../../push_swap/libft/libft.h"
+#include "libft.h"
 #include "push_swap.h"
 
 void	op_swap(char *op, t_stack *a, t_stack *b)
