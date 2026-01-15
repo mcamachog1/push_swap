@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:29:05 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/13 16:29:34 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:45:05 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int		sort_by_cost(t_stack *a, t_stack *b);
 void	sort_by_selection(t_stack *a, t_stack *b);
 
 /* --- Utilities and validation --- */
+int		ft_atoi_plus(const char *nptr, int *integer);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
-int		*get_params(char **argv, int *size);
+int		*get_params(int argc, char **argv, int *size);
 int		input_error(int argc, char **argv);
 void	load_stack_a(t_stack *a, int *numbers, int size);
 

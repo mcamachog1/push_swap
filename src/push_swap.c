@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:06:33 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/13 17:36:21 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:42:50 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	main(int argc, char *argv[])
 	int		*numbers;
 	int		size;
 
-	if (input_error(argc, argv))
-		return (1);
-	numbers = get_params(argv, &size);
+	numbers = get_params(argc, argv, &size);
 	if (!numbers)
 		return (1);
 	a = new_stack(size);

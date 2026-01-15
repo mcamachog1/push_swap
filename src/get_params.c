@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/13 17:25:19 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:04:00 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_size(char **argv)
 		j = 0;
 		while (cnumbers[j] != NULL)
 		{
-			size++;	
+			size++;
 			j++;
 		}
 		i++;
@@ -42,18 +42,16 @@ static int	get_size(char **argv)
 
 static int	valid_argument(char *str)
 {
-	int i;
+	int	i;
+	int	n;
 
 	i = 0;
-
 	if (str[i] && (str[i] == '-' || str[i] == '+'))
-		i++;	
-	while (str[i] && (size_t)i < ft_strlen(str))
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
 		i++;
-	}
+	if (ft_strlen(&str[i]) > 10)
+		return (0);
+	if (ft_atoi_plus(str, &n) != 0)
+		return (0);
 	return (1);
 }
 
@@ -86,10 +84,12 @@ static int	load_numbers(char **argv, int *numbers)
 	return (j);
 }
 
-int	*get_params(char **argv, int *size)
+int	*get_params(int argc, char **argv, int *size)
 {
 	int		*numbers;
 
+	if (argc == 1)
+		return (0);
 	*size = get_size(argv);
 	if (size == 0)
 		return (0);

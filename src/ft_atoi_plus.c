@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:45:51 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 12:09:11 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:09:06 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,19 @@ int	ft_atoi_plus(const char *nptr, int *integer)
 			factor = -1;
 		nptr++;
 	}
-	if (ft_strlen(nptr) > 10)
-		return (1);
 	while (ft_isdigit(*nptr))
 	{
-		if (factor == 1)
-		{
-			if (number > (2147483647 - (*nptr - 48)) / 10)
-				return (1);
-		}
-		else
-		{
-			if (number > (2147483648 - (*nptr - 48)) / 10)
-				return (1);
-		}
+		if (factor == 1 && number > (2147483647 - (*nptr - 48)) / 10)
+			return (1);
+		if (factor == -1 && -number < (-2147483648 - (*nptr - 48)) / 10)
+			return (1);
 		number = number * 10 + (*nptr - 48);
 		nptr++;
 	}
 	*integer = number * factor;
 	return (0);
 }
-
+/*
 int main() 
 {
 	int integer;
@@ -79,3 +71,4 @@ int main()
 	}
     return 0;
 }
+*/
