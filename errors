@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "--- Casos limites ---"
+echo "./push_swap 2147483647 -2147483648"
+./push_swap 2147483647 -2147483648
+echo "--- Casos error ---"
+echo "./push_swap 1 -2147483649" 
+./push_swap 1 -2147483649 
+echo "./push_swap  2147483648 1"
+./push_swap  2147483648 1
+echo "./push_swap  6 -5 2a"
+./push_swap  6 -5 2a
+echo "./push_swap  6 -5 -5 1"
+./push_swap  6 -5 -5 1

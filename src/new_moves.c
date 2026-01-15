@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "push_swap.h"
 
 t_moves	*new_moves(int number)

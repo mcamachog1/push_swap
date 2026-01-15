@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves)
 {

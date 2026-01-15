@@ -17,7 +17,10 @@
 #  define MAX_COST 1000
 # endif
 
+# include <stdlib.h>
+# include <unistd.h>
 # include <stddef.h>
+# include "libft.h"
 
 typedef struct stack
 {

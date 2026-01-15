@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libft.h"
 #include "push_swap.h"
 
 void	op_push(char *op, t_stack *a, t_stack *b)

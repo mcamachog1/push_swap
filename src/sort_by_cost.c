@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "push_swap.h"
 
 int	sort_by_cost(t_stack *a, t_stack *b)

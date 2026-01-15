@@ -10,20 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "push_swap.h"
-#include "libft.h"
 
 static void	free_stack(t_stack *s)
 {
 	free(s->array);
+	s->array = NULL;
 	free(s);
+	s = NULL;
 }
 
 void	free_stacks(t_stack *a, t_stack *b, int error)
 {
-	free_stack(a);
-	free_stack(b);
+	if (a != NULL)
+	{
+		free_stack(a);
+		a = NULL;
+	}
+	if (b != NULL)
+	{
+		free_stack(b);
+		b = NULL;
+	}
 	if (error != 0)
+	{
 		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
 }
