@@ -8,15 +8,41 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 
 # Archivos de push_swap
 
-SRCS = ./src/calculate_moves.c  ./src/ft_min.c       ./src/op_rotate.c       ./src/push_stack.c \
-./src/cost_ra.c          ./src/get_index.c    ./src/op_swap.c         ./src/push_swap.c \
-./src/cost_rb.c          ./src/get_target.c   ./src/optimize_moves.c  ./src/is_duplicated.c \
-./src/cost_rra.c         ./src/input_error.c  ./src/order_3.c         ./src/rotate.c \
-./src/cost_rrb.c         ./src/is_ordered.c   ./src/pop_stack.c       ./src/rrotate.c \
-./src/exec_moves.c       ./src/new_moves.c    ./src/swap.c  ./src/ft_atoi_plus.c \
-./src/free_stacks.c       ./src/new_stack.c    ./src/sort_by_selection.c ./src/min_first.c \
-./src/ft_max.c           ./src/op_push.c      ./src/print_stack.c	./src/get_params.c \
-./src/load_stack_a.c      ./src/get_best_moves.c ./src/sort_by_cost.c ./src/free_string_pointers.c
+SRCS = ./src/calculate_moves.c \
+       ./src/cost_ra.c \
+       ./src/cost_rb.c \
+       ./src/cost_rra.c \
+       ./src/cost_rrb.c \
+       ./src/exec_moves.c \
+       ./src/free_stacks.c \
+       ./src/free_string_pointers.c \
+       ./src/ft_atoi_plus.c \
+       ./src/ft_max.c \
+       ./src/ft_min.c \
+       ./src/get_best_moves.c \
+       ./src/get_index.c \
+       ./src/get_params.c \
+       ./src/get_target.c \
+       ./src/input_error.c \
+       ./src/is_duplicated.c \
+       ./src/is_ordered.c \
+       ./src/load_stack_a.c \
+       ./src/min_first.c \
+       ./src/new_moves.c \
+       ./src/new_stack.c \
+       ./src/op_push.c \
+       ./src/op_rotate.c \
+       ./src/op_swap.c \
+       ./src/optimize_moves.c \
+       ./src/order_3.c \
+       ./src/pop_stack.c \
+       ./src/push_stack.c \
+       ./src/push_swap.c \
+       ./src/rotate.c \
+       ./src/rrotate.c \
+       ./src/sort_by_cost.c \
+       ./src/sort_by_selection.c \
+       ./src/swap.c
 
 OBJS        = $(SRCS:.c=.o)
 

@@ -22,9 +22,9 @@ static int	ft_isspace(char c)
 
 static int	is_overflow(int factor, int number, char c)
 {
-	if (factor == 1 && number > (2147483647 - (c - 48)) / 10)
+	if (factor == 1 && number > (INT_MAX - (c - 48)) / 10)
 		return (1);
-	if (factor == -1 && number > (2147483648 - (c - 48)) / 10)
+	if (factor == -1 && number > (INT_MIN + (c - 48)) / (-10))
 		return (1);
 	return (0);
 }
@@ -56,27 +56,3 @@ int	ft_atoi_plus(const char *nptr, int *integer)
 	*integer = number * factor;
 	return (0);
 }
-/*
-int main() 
-{
-	int integer;
-	int i;
-	char	str[15] = "-214748364";
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_atoi_plus(str, &integer) == 0)
-			printf("%i\n", integer);
-		else
-		{
-			printf("overflow con el str:%s", str);
-			return (1);
-		}
-		i = ft_strlen(str);
-		if (i < 15 - 1)
-			str[i] = '8';
-	}
-    return 0;
-}
-*/
