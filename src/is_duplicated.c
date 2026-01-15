@@ -15,8 +15,10 @@ int	is_duplicated(int *array, int n, int size)
 	int	i;
 
 	i = 0;
+	if (size - 1 < 0)
+		return (0);
 	while (i < size)
-	{			
+	{
 		if (array[i] == n)
 			return (1);
 		i++;

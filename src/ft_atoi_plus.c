@@ -21,6 +21,15 @@ static int	ft_isspace(char c)
 		return (0);
 }
 
+static int	is_overflow(int factor, int number, char c)
+{
+	if (factor == 1 && number > (2147483647 - (c - 48)) / 10)
+		return (1);
+	if (factor == -1 && number > (2147483648 - (c - 48)) / 10)
+		return (1);
+	return (0);
+}
+
 int	ft_atoi_plus(const char *nptr, int *integer)
 {
 	int	factor;
@@ -36,15 +45,15 @@ int	ft_atoi_plus(const char *nptr, int *integer)
 			factor = -1;
 		nptr++;
 	}
-	while (ft_isdigit(*nptr))
+	while (ft_isdigit(*nptr) && *nptr != '\0')
 	{
-		if (factor == 1 && number > (2147483647 - (*nptr - 48)) / 10)
-			return (1);
-		if (factor == -1 && -number < (-2147483648 - (*nptr - 48)) / 10)
+		if (is_overflow(factor, number, *nptr))
 			return (1);
 		number = number * 10 + (*nptr - 48);
 		nptr++;
 	}
+	if (*nptr != '\0' && !ft_isdigit(*nptr))
+		return (1);
 	*integer = number * factor;
 	return (0);
 }

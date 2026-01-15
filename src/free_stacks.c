@@ -25,5 +25,5 @@ void	free_stacks(t_stack *a, t_stack *b, int error)
 	free_stack(a);
 	free_stack(b);
 	if (error != 0)
-		ft_putstr_fd("Erro\n", 2);
+		ft_putstr_fd("Error\n", 2);
 }

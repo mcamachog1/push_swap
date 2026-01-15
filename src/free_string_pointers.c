@@ -25,5 +25,5 @@ void	free_string_pointers(char **pointers, int error)
 	}
 	free(pointers);
 	if (error != 0)
-		ft_putstr_fd("Erro\n", 2);
+		ft_putstr_fd("Error\n", 2);
 }

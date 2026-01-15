@@ -40,7 +40,7 @@ static int	get_size(char **argv)
 	return (size);
 }
 
-static int	valid_argument(char *str)
+static int	valid_argument(char *str, int *numbers, int size)
 {
 	int	i;
 	int	n;
@@ -51,6 +51,8 @@ static int	valid_argument(char *str)
 	if (ft_strlen(&str[i]) > 10)
 		return (0);
 	if (ft_atoi_plus(str, &n) != 0)
+		return (0);
+	if (is_duplicated(numbers, ft_atoi(str), size))
 		return (0);
 	return (1);
 }
@@ -72,9 +74,7 @@ static int	load_numbers(char **argv, int *numbers)
 		temp = cnumbers;
 		while (*cnumbers != NULL)
 		{
-			if (!valid_argument(*cnumbers))
-				return (free_string_pointers(temp, 1), 0);
-			if (is_duplicated(numbers, ft_atoi(*cnumbers), j - 1))
+			if (!valid_argument(*cnumbers, numbers, j))
 				return (free_string_pointers(temp, 1), 0);
 			numbers[j] = ft_atoi(*cnumbers);
 			j++;
@@ -91,7 +91,10 @@ int	*get_params(int argc, char **argv, int *size)
 	int		*numbers;
 
 	if (argc == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
 		return (0);
+	}
 	*size = get_size(argv);
 	if (size == 0)
 		return (0);
