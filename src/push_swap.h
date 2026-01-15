@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:29:05 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 13:45:05 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:40:20 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct moves
 }	t_moves;
 
 /* --- Memory management and stacks --- */
-void	free_stacks(t_stack *a, t_stack *b);
-void	free_string_pointers(char **pointers);
+void	free_stacks(t_stack *a, t_stack *b, int error);
+void	free_string_pointers(char **pointers, int error);
 t_moves	*new_moves(int number);
 t_stack	*new_stack(int size);
 int		pop_stack(t_stack *s, int *number);
@@ -77,6 +77,7 @@ int		ft_min(int a, int b);
 t_moves	*get_best_moves(t_stack *a, t_stack *b, t_moves *min_moves);
 int		*get_params(int argc, char **argv, int *size);
 int		input_error(int argc, char **argv);
+int		is_duplicated(int *array, int n, int size);
 void	load_stack_a(t_stack *a, int *numbers, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 14:04:00 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:43:29 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_size(char **argv)
 			j++;
 		}
 		i++;
-		free_string_pointers(cnumbers);
+		free_string_pointers(cnumbers, 0);
 	}
 	return (size);
 }
@@ -67,19 +67,21 @@ static int	load_numbers(char **argv, int *numbers)
 	while (argv[i] != NULL)
 	{
 		cnumbers = ft_split(argv[i], ' ');
-		temp = cnumbers;
 		if (!cnumbers)
 			return (0);
+		temp = cnumbers;
 		while (*cnumbers != NULL)
 		{
 			if (!valid_argument(*cnumbers))
-				return (free_string_pointers(temp), 0);
+				return (free_string_pointers(temp, 1), 0);
+			if (is_duplicated(numbers, ft_atoi(*cnumbers), j - 1))
+				return (free_string_pointers(temp, 1), 0);
 			numbers[j] = ft_atoi(*cnumbers);
 			j++;
 			cnumbers++;
 		}
 		i++;
-		free_string_pointers(temp);
+		free_string_pointers(temp, 0);
 	}
 	return (j);
 }

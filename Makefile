@@ -10,7 +10,7 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 
 SRCS = ./src/calculate_moves.c  ./src/ft_min.c       ./src/op_rotate.c       ./src/push_stack.c \
 ./src/cost_ra.c          ./src/get_index.c    ./src/op_swap.c         ./src/push_swap.c \
-./src/cost_rb.c          ./src/get_target.c   ./src/optimize_moves.c  \
+./src/cost_rb.c          ./src/get_target.c   ./src/optimize_moves.c  ./src/is_duplicated.c \
 ./src/cost_rra.c         ./src/input_error.c  ./src/order_3.c         ./src/rotate.c \
 ./src/cost_rrb.c         ./src/is_ordered.c   ./src/pop_stack.c       ./src/rrotate.c \
 ./src/exec_moves.c       ./src/new_moves.c    ./src/swap.c  ./src/ft_atoi_plus.c \

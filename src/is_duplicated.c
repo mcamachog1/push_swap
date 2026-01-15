@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_string_pointers.c                             :+:      :+:    :+:   */
+/*   is_duplicated.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 15:42:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 14:44:49 by macamach         ###   ########.fr       */
+/*   Created: 2026/01/15 14:20:39 by macamach          #+#    #+#             */
+/*   Updated: 2026/01/15 14:23:38 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-
-void	free_string_pointers(char **pointers, int error)
+int	is_duplicated(int *array, int n, int size)
 {
 	int	i;
 
 	i = 0;
-	while (pointers[i] != NULL)
-	{
-		free(pointers[i]);
+	while (i < size)
+	{			
+		if (array[i] == n)
+			return (1);
 		i++;
 	}
-	free(pointers);
-	if (error != 0)
-		ft_putstr_fd("Erro\n", 2);
+	return (0);
 }
