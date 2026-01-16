@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "--- No arguments  ---"
+./push_swap
 echo "--- Casos limites ---"
 echo "./push_swap 2147483647 -2147483648"
 ./push_swap 2147483647 -2147483648

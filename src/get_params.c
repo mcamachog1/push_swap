@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 14:43:29 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:33:51 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ static int	valid_argument(char *str, int *numbers, int size)
 	if (ft_strlen(&str[i]) > 10)
 		return (0);
 	if (ft_atoi_plus(str, &n) != 0)
+	{
+		free(numbers);
+		numbers = NULL;
 		return (0);
+	}
 	if (is_duplicated(numbers, ft_atoi(str), size))
 		return (0);
 	return (1);
@@ -89,10 +93,7 @@ int	*get_params(int argc, char **argv, int *size)
 	int		*numbers;
 
 	if (argc == 1)
-	{
-		ft_putstr_fd("Error\n", 2);
 		return (0);
-	}
 	*size = get_size(argv);
 	if (size == 0)
 		return (0);
@@ -100,6 +101,9 @@ int	*get_params(int argc, char **argv, int *size)
 	if (!numbers)
 		return (0);
 	if (!load_numbers(argv, numbers))
+	{
+		free(numbers);
 		return (0);
+	}
 	return (numbers);
 }
