@@ -55,7 +55,11 @@ static int	valid_argument(char *str, int *numbers, int size)
 		return (0);
 	}
 	if (is_duplicated(numbers, ft_atoi(str), size))
+	{
+		free(numbers);
+		numbers = NULL;
 		return (0);
+	}
 	return (1);
 }
 
