@@ -99,8 +99,11 @@ int	*get_params(int argc, char **argv, int *size)
 	if (argc == 1)
 		return (0);
 	*size = get_size(argv);
-	if (size == 0)
+	if (*size == 0)
+	{
+		ft_putstr_fd("Error\n", 2);
 		return (0);
+	}
 	numbers = malloc(*size * sizeof(int));
 	if (!numbers)
 		return (0);

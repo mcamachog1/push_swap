@@ -1,16 +1,28 @@
 #!/bin/bash
 
-echo "--- No arguments  ---"
+echo "--- No arguments ---"
+echo "/push_swap"
 ./push_swap
+echo "---  One number  ---"
+echo "./push_swap 3"
+./push_swap 3
+echo "--- Already sort ---"
+echo "./push_swap 1 2 3"
+./push_swap 1 2 3
+
 echo "--- Casos limites ---"
 echo "./push_swap 2147483647 -2147483648"
 ./push_swap 2147483647 -2147483648
 echo "--- Casos error ---"
 echo "./push_swap 1 -2147483649" 
-./push_swap 1 -2147483649 
+./push_swap 1 -2147483649 > /dev/null
 echo "./push_swap  2147483648 1"
-./push_swap  2147483648 1
+./push_swap  2147483648 1 > /dev/null
 echo "./push_swap  6 -5 2a"
-./push_swap  6 -5 2a
+./push_swap  6 -5 2a > /dev/null
 echo "./push_swap  6 -5 -5 1"
-./push_swap  6 -5 -5 1
+./push_swap  6 -5 -5 1 > /dev/null
+echo "./push_swap  "" "
+./push_swap  " " > /dev/null
+echo "./push_swap  " " "
+./push_swap  " " > /dev/null
