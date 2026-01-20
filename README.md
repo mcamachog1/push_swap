@@ -52,9 +52,13 @@ You can verify the results by sending the output of push_swap directly into the 
 ```
 ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
 ```
-**Error Handling**
+## Error Handling
 
 If invalid arguments are provided (e.g., non-integers, duplicates, or numbers exceeding integer limits), the program displays Error followed by a newline on the standard error output.
+
+If there is no arguments, the program return the prompt
+If the argument is an empty string return 'Error\n'
+If the argumente is a string just with spaces return 'Error\n' 
 
 ## Resources:
 

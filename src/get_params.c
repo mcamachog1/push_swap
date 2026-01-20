@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/16 16:33:51 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:14:58 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	get_size(char **argv)
 	size = 0;
 	while (argv[i] != NULL)
 	{
+		if ((int)ft_strlen(argv[i]) == 0)
+			return (0);
 		cnumbers = ft_split(argv[i], ' ');
 		if (!cnumbers)
 			return (0);
