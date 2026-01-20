@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:43:07 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/20 16:19:41 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:40:19 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "push_swap.h"
 
-
+void	print_stack(t_stack *a, t_stack *b);
 void	do_op_swap(char *op, t_stack *a, t_stack *b);
 void	do_op_push(char *op, t_stack *a, t_stack *b);
 void	do_op_rotate(char *op, t_stack *a, t_stack *b);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	b = new_stack(size);
 	load_stack_a(a, numbers, size);
 	free(numbers);
-//	fd = 0;
+	//fd = 0;
 	fd = open("file.txt", O_RDONLY);
 	while (1)
 	{
@@ -73,7 +73,6 @@ void	do_op_push(char *op, t_stack *a, t_stack *b)
 	int	n;
 
 	if (!ft_strncmp("pa", op, 2))
-
 		if (pop_stack(b, &n) == 0)
 			push_stack(a, n);
 	if (!ft_strncmp("pb", op, 2))
