@@ -9,9 +9,9 @@ fi
 N=$1
 
 ARG=$(./nums_generator $N)
-
+echo $ARG
 echo "--- Testing $N numbers ---"
 echo -n "--- Movements: "
 ./push_swap $ARG | wc -l 
 echo -n "--- Result: "
-./push_swap $ARG | ./checker_linux $ARG
+./push_swap $ARG | ./checker $ARG

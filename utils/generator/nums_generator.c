@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 12:33:11 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/07 13:44:53 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:56:58 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	*ft_random(int n)
 	srand(time(NULL));
 	i = 0;
 	j = 0;
-	while (i < 1000 && j < n)
+	while (i < 100 && j < n)
 	{
-		num = (rand() % (1999)) + (-999);
+		num = (rand() % (199)) + (-99);
 		if (!is_duplicate(numbers, num, n))
 		{
 			numbers[j] = num;
