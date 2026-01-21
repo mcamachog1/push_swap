@@ -5,7 +5,7 @@ echo "/push_swap"
 ./push_swap
 echo "---  One number  ---"
 echo "./push_swap 3"
-./push_swap 3
+./push_swap 1
 echo "--- Already sort ---"
 echo "./push_swap 1 2 3"
 ./push_swap 1 2 3
@@ -22,7 +22,7 @@ echo "./push_swap  6 -5 2a"
 ./push_swap  6 -5 2a > /dev/null
 echo "./push_swap  6 -5 -5 1"
 ./push_swap  6 -5 -5 1 > /dev/null
-echo "./push_swap  "" "
+echo './push_swap  "" '
 ./push_swap  " " > /dev/null
-echo "./push_swap  " " "
+echo './push_swap  " " '
 ./push_swap  " " > /dev/null

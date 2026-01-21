@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:29:05 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/15 14:40:20 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/21 13:55:47 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # ifndef MAX_COST
-#  define MAX_COST 1000
+#  define MAX_COST 2000
 # endif
 
 # include <stdlib.h>

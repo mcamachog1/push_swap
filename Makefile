@@ -2,11 +2,11 @@ NAME        = push_swap
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
-# Rutas de la Libft
+# Libft
 LIBFT_DIR   = ./libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-# Archivos de push_swap
+# push_swap
 
 SRCS = ./src/calculate_moves.c \
        ./src/cost_ra.c \
@@ -46,48 +46,49 @@ SRCS = ./src/calculate_moves.c \
 
 OBJS = $(SRCS:.c=.o)
 
-# Incluir los headers (tanto los tuyos como los de libft)
-HEADERS = ./src/push_swap.h ./libft/libft.h
+# Incluide headers
+HEADER_PUSH_SWAP = ./src/push_swap.h 
+HEADER_LIBFT = ./libft/libft.h 
 INCLUDES    = -I./src -I$(LIBFT_DIR)
 
 all: $(LIBFT) $(NAME)
 
-# Regla de depuracion
+# For debug
 debug: CFLAGS += -g
 debug: re
 
-# REGLA 1: Compilar la Libft usando su propio Makefile
-# El flag -C le dice a make que cambie al directorio indicado antes de ejecutar
-$(LIBFT):
+# Compile Libft
+$(LIBFT): 
 	@make -C $(LIBFT_DIR)
 
-# REGLA 2: Compil)ar los .o de push_swap
-%.o: %.c $(HEADERS)
+# Compile .o push_swap
+%.o: %.c $(HEADER_PUSH_SWAP)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# REGLA 3: Enlazar todo junto
-$(NAME): $(OBJS)
+# LINK 
+$(NAME): $(OBJS) $(HEADER_PUSH_SWAP)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 clean:
-	rm -f $(OBJS) 
+	rm -f ./src/push_swap.o 
+	rm -f $(OBJS_BONUS) 
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME) 
+	rm -f $(BONUS_NAME) 
 	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus debug $(LIBFT)
-
-$(OBJS): ./src/push_swap.h $(LIBFT_DIR)/libft.h
+.PHONY: all clean fclean re bonus debug degug_bonus re_bonus $(LIBFT)
 
 
-# ----- BONUS ------- 
+# ---------------------- BONUS -------------------#
+
 BONUS_NAME = checker
 
-bonus: $(BONUS_NAME)
+HEADER_BONUS = ./src_bonus/checker.h 
 
 SRCS_BONUS = ./src/calculate_moves.c \
        ./src/cost_ra.c \
@@ -123,27 +124,25 @@ SRCS_BONUS = ./src/calculate_moves.c \
        ./src/sort_by_cost.c \
        ./src/sort_by_selection.c \
        ./src/swap.c \
-	./src_bonus/checker.c \
-	./src_bonus/op_utils.c 
+       ./src_bonus/checker.c \
+       ./src_bonus/op_utils.c 
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 INCLUDES_BONUS = $(INCLUDES) -I./src_bonus
 
-$(BONUS_NAME): $(OBJS_BONUS) $(LIBFT)
+bonus: $(BONUS_NAME)
+
+# Compile .o bonus  
+%.o: %.c $(HEADER_BONUS) 
+	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
+
+# Link 
+$(BONUS_NAME): $(OBJS_BONUS) $(HEADER_BONUS)
 	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(BONUS_NAME)
 
 debug_bonus: CFLAGS += -g
 debug_bonus: re_bonus 
-
-clean_bonus:
-	rm -f $(OBJS_BONUS) 
-
-fclean_bonus: clean_bonus
-	rm -f $(BONUS_NAME) 
-
-re_bonus: fclean_bonus bonus
-
+re_bonus: fclean all bonus
 	
 # Change BUFFERSIZE: make re -C ./libft CFLAGS="-Wall -Wextra -Werror -D BUFFER_SIZE=1000"
-	
