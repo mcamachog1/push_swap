@@ -67,6 +67,8 @@ If the argumente is a string just with spaces return 'Error\n'
 
 * https://www.youtube.com/watch?v=wRvipSG4Mmk - Basic concepts for stack manipulation.
 
+* https://valgrind.org/docs/manual/faq.html#faq.deflost - Valgrind manual
+
 ## AI Usage
 AI tools were used during this project for:
 * Researching different sorting strategies and understanding instruction logic.
