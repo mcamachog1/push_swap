@@ -62,27 +62,12 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 # Compile .o push_swap
-%.o: %.c $(HEADER_PUSH_SWAP)
+src/%.o: src/%.c $(HEADER_PUSH_SWAP)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # LINK 
-$(NAME): $(OBJS) $(HEADER_PUSH_SWAP)
+$(NAME): $(LIBFT) $(OBJS) 
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-
-clean:
-	rm -f ./src/push_swap.o 
-	rm -f $(OBJS_BONUS) 
-	@make -C $(LIBFT_DIR) clean
-
-fclean: clean
-	rm -f $(NAME) 
-	rm -f $(BONUS_NAME) 
-	@make -C $(LIBFT_DIR) fclean
-
-re: fclean all
-
-.PHONY: all clean fclean re bonus debug degug_bonus re_bonus $(LIBFT)
-
 
 # ---------------------- BONUS -------------------#
 
@@ -134,15 +119,29 @@ INCLUDES_BONUS = $(INCLUDES) -I./src_bonus
 bonus: $(BONUS_NAME)
 
 # Compile .o bonus  
-%.o: %.c $(HEADER_BONUS) 
+src_bonus/%.o: src_bonus/%.c $(HEADER_BONUS) 
 	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
 
 # Link 
-$(BONUS_NAME): $(OBJS_BONUS) $(HEADER_BONUS)
+$(BONUS_NAME): $(LIBFT) $(OBJS_BONUS)
 	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(BONUS_NAME)
 
 debug_bonus: CFLAGS += -g
 debug_bonus: re_bonus 
 re_bonus: fclean all bonus
-	
+
+clean:
+	rm -f ./src/push_swap.o 
+	rm -f $(OBJS_BONUS) 
+	@make -C $(LIBFT_DIR) clean
+
+fclean: clean
+	rm -f $(NAME) 
+	rm -f $(BONUS_NAME) 
+	@make -C $(LIBFT_DIR) fclean
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus debug degug_bonus re_bonus 
+
 # Change BUFFERSIZE: make re -C ./libft CFLAGS="-Wall -Wextra -Werror -D BUFFER_SIZE=1000"

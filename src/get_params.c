@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:43:45 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/20 11:14:58 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:55:34 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_size(char **argv)
 		if ((int)ft_strlen(argv[i]) == 0)
 			return (0);
 		cnumbers = ft_split(argv[i], ' ');
-		if (!cnumbers)
+		if (!(*cnumbers))
 			return (0);
 		j = 0;
 		while (cnumbers[j] != NULL)
@@ -99,20 +99,20 @@ int	*get_params(int argc, char **argv, int *size)
 	int		*numbers;
 
 	if (argc == 1)
-		return (0);
+		return (NULL);
 	*size = get_size(argv);
 	if (*size == 0)
 	{
 		ft_putstr_fd("Error\n", 2);
-		return (0);
+		return (NULL);
 	}
 	numbers = malloc(*size * sizeof(int));
 	if (!numbers)
-		return (0);
+		return (NULL);
 	if (!load_numbers(argv, numbers))
 	{
 		free(numbers);
-		return (0);
+		return (NULL);
 	}
 	return (numbers);
 }

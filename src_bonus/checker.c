@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:43:07 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/21 11:32:02 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:03:55 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
-	return (0);
+	return (free_stacks(a, b, 0), 0);
 }
