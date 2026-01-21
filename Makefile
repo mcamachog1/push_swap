@@ -124,8 +124,7 @@ SRCS_BONUS = ./src/calculate_moves.c \
        ./src/sort_by_selection.c \
        ./src/swap.c \
 	./src_bonus/checker.c \
-	./src_bonus/op_utils.c \
-	./src_bonus/print_stack.c #Eliminar
+	./src_bonus/op_utils.c 
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 

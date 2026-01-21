@@ -9,7 +9,7 @@ fi
 N=$1
 
 ARG=$(./nums_generator $N)
-echo $ARG
+#echo $ARG
 echo "--- Testing $N numbers ---"
 echo -n "--- Movements: "
 ./push_swap $ARG | wc -l 
