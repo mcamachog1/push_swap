@@ -27,7 +27,7 @@ static int	get_size(char **argv)
 			return (0);
 		cnumbers = ft_split(argv[i], ' ');
 		if (!(*cnumbers))
-			return (0);
+			free_string_pointers(cnumbers, 1);
 		j = 0;
 		while (cnumbers[j] != NULL)
 		{
