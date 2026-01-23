@@ -58,7 +58,7 @@ debug: CFLAGS += -g
 debug: re
 
 # Compile Libft
-$(LIBFT): 
+$(LIBFT): $(HEADER_LIBFT) 
 	@make -C $(LIBFT_DIR)
 
 # Compile .o push_swap

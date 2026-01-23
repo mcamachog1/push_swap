@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 11:33:10 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/21 14:01:16 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/23 10:27:57 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,26 @@ void	do_op_rotate(char *op, t_stack *a, t_stack *b)
 	}
 }
 
-void	exec_ops(t_stack *a, t_stack *b)
+int op_valid(char *op)
+{
+	if (ft_strncmp("sa", op, 2) == 0 || ft_strncmp("sb", op, 2) == 0)
+		return (1);
+	if (ft_strncmp("pa", op, 2) == 0 || ft_strncmp("pb", op, 2) == 0)
+		return (1);
+	if (ft_strncmp("ra", op, 2) == 0 || ft_strncmp("rb", op, 2) == 0)
+		return (1);
+	if (ft_strncmp("ss", op, 2) == 0)
+		return (1);
+	if (ft_strncmp("rra", op, 3) == 0 || ft_strncmp("rrb", op, 3) == 0)
+		return (1);
+	if (ft_strncmp("rr", op, 2) == 0 && ft_strlen(op) == 3)
+		return (1);
+	if (ft_strncmp("rrr", op, 3) == 0  && ft_strlen(op) == 4)
+		return (1);
+	return (0);
+}
+
+int	exec_ops(t_stack *a, t_stack *b)
 {
 	int		fd;
 	char	*op;
@@ -70,10 +89,16 @@ void	exec_ops(t_stack *a, t_stack *b)
 	{
 		op = get_next_line(fd);
 		if (op == NULL)
-			return ;
+			return (0);
 		do_op_swap(op, a, b);
 		do_op_push(op, a, b);
 		do_op_rotate(op, a, b);
+		if (op_valid(op) == 0)
+		{
+			free(op);
+			ft_putstr_fd("Error\n", 2);
+			return (1);
+		}
 		free(op);
 	}
 }
