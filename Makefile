@@ -23,7 +23,6 @@ SRCS = ./src/calculate_moves.c \
        ./src/get_index.c \
        ./src/get_params.c \
        ./src/get_target.c \
-       ./src/input_error.c \
        ./src/is_duplicated.c \
        ./src/is_ordered.c \
        ./src/load_stack_a.c \
@@ -90,7 +89,6 @@ SRCS_BONUS = ./src/calculate_moves.c \
        ./src/get_index.c \
        ./src/get_params.c \
        ./src/get_target.c \
-       ./src/input_error.c \
        ./src/is_duplicated.c \
        ./src/is_ordered.c \
        ./src/load_stack_a.c \
