@@ -6,7 +6,7 @@
 /*   By: macamach <mcamach@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 11:33:10 by macamach          #+#    #+#             */
-/*   Updated: 2026/01/23 10:27:57 by macamach         ###   ########.fr       */
+/*   Updated: 2026/01/23 10:37:08 by macamach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	do_op_rotate(char *op, t_stack *a, t_stack *b)
 	}
 }
 
-int op_valid(char *op)
+int	op_valid(char *op)
 {
 	if (ft_strncmp("sa", op, 2) == 0 || ft_strncmp("sb", op, 2) == 0)
 		return (1);
@@ -74,7 +74,7 @@ int op_valid(char *op)
 		return (1);
 	if (ft_strncmp("rr", op, 2) == 0 && ft_strlen(op) == 3)
 		return (1);
-	if (ft_strncmp("rrr", op, 3) == 0  && ft_strlen(op) == 4)
+	if (ft_strncmp("rrr", op, 3) == 0 && ft_strlen(op) == 4)
 		return (1);
 	return (0);
 }
